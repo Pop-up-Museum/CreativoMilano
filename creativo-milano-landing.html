@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Creativo Milano — Design &amp; Build Studio</title>
 <meta name="description" content="Creativo Milano designs, builds and maintains museums, theme parks, monuments and urban landmarks around the world.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23FFD400'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23FCB040'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   :root{
     --cream:#FAF8F3; --white:#FFFFFF; --ink:#18181A; --ink-soft:#5C5C57; --line:#E5E1D6;
-    --red:#E2231A; --orange:#F7941D; --yellow:#FFD400; --green:#39B54A; --azure:#00AEEF; --blue:#0054A6;
+    --red:#BF1E2E; --orange:#F1592A; --yellow:#FCB040; --green:#8CC63F; --azure:#25AAE1; --blue:#0F75BC;
     --font-display:'Space Grotesk',sans-serif; --font-body:'Inter',sans-serif; --font-mono:'JetBrains Mono',monospace;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -36,8 +36,9 @@
   .nav{position:fixed;top:4px;left:0;width:100%;z-index:900;display:flex;align-items:center;justify-content:space-between;
     padding:24px 6%;transition:background .3s ease,padding .3s ease,box-shadow .3s ease;}
   .nav.scrolled{background:rgba(250,248,243,.92);backdrop-filter:blur(10px);padding:16px 6%;box-shadow:0 1px 0 var(--line);}
-  .logo{font-family:var(--font-display);font-weight:700;font-size:1.15rem;letter-spacing:-.02em;text-decoration:none;display:flex;gap:.35rem;}
+  .logo{font-family:var(--font-display);font-weight:700;font-size:1.15rem;letter-spacing:-.02em;text-decoration:none;display:flex;align-items:center;gap:.5rem;}
   .logo span{color:var(--blue);font-weight:500;}
+  .logo-mark{height:26px;width:auto;}
   .nav-links{display:flex;align-items:center;gap:2.4rem;}
   .nav-links a{font-family:var(--font-mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;text-decoration:none;opacity:.7;transition:opacity .2s ease;}
   .nav-links a:hover{opacity:1;}
@@ -72,10 +73,13 @@
     border-bottom:1px solid var(--ink);padding-bottom:3px;transition:opacity .2s ease;}
   .btn-text:hover{opacity:.6;}
 
-  .skyline-wrap{position:relative;height:340px;}
-  .skyline path,.skyline rect,.skyline circle{fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;
-    stroke-dasharray:600;stroke-dashoffset:600;animation:draw 1.6s ease forwards;}
-  @keyframes draw{to{stroke-dashoffset:0;}}
+  .hero-photo{position:relative;height:420px;border-radius:20px;overflow:hidden;}
+  .hero-photo img{width:100%;height:100%;object-fit:cover;}
+  .hero-photo::after{content:'';position:absolute;inset:0;
+    background:linear-gradient(165deg,rgba(15,117,188,.22),rgba(191,30,46,0) 60%);}
+  .hero-photo-tag{position:absolute;left:16px;bottom:16px;background:rgba(250,248,243,.92);backdrop-filter:blur(6px);
+    padding:.5rem .9rem;border-radius:30px;font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;
+    letter-spacing:.04em;}
 
   /* ---------- services ---------- */
   .services{padding:8rem 6% 6rem;}
@@ -97,18 +101,15 @@
   /* ---------- work / projects ---------- */
   .work{padding:6rem 6%;background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
   .project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem;margin-top:3rem;}
-  .project-card{border-radius:16px;overflow:hidden;aspect-ratio:4/3;position:relative;background:var(--c-tint);
-    transition:transform .35s ease;}
-  .project-card:hover{transform:translateY(-5px);}
-  .project-card .ph-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
-  .project-card .ph-icon svg{width:30%;height:30%;color:var(--c);opacity:.55;}
-  .project-card .ph-pattern{position:absolute;inset:0;opacity:.5;
-    background-image:repeating-linear-gradient(135deg,rgba(0,0,0,.05) 0 2px,transparent 2px 16px);}
-  .project-label{position:absolute;left:0;right:0;bottom:0;background:rgba(255,255,255,.92);backdrop-filter:blur(4px);
-    padding:.9rem 1.1rem;}
-  .project-label .name{font-family:var(--font-display);font-weight:600;font-size:.95rem;}
+  .project-card{border-radius:16px;overflow:hidden;aspect-ratio:4/3;position:relative;background:var(--ink);}
+  .project-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+  .project-card:hover img{transform:scale(1.06);}
+  .project-card::after{content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.65) 100%);}
+  .project-label{position:absolute;left:0;right:0;bottom:0;padding:1rem 1.1rem;z-index:2;}
+  .project-label .name{font-family:var(--font-display);font-weight:600;font-size:.95rem;color:#fff;}
   .project-label .meta{font-family:var(--font-mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.05em;
-    color:var(--c);margin-top:.2rem;}
+    color:var(--c);margin-top:.25rem;}
   .work-note{font-size:.84rem;color:var(--ink-soft);margin-top:2.2rem;font-style:italic;}
 
   /* ---------- numbers ---------- */
@@ -132,7 +133,8 @@
   footer{background:var(--ink);color:rgba(255,255,255,.62);padding:3rem 6% 2rem;font-size:.85rem;}
   .footer-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;
     padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.12);}
-  .footer-logo{font-family:var(--font-display);color:#fff;font-weight:700;font-size:1.1rem;}
+  .footer-logo{font-family:var(--font-display);color:#fff;font-weight:700;font-size:1.1rem;display:flex;align-items:center;gap:.5rem;}
+  .footer-logo img{height:24px;width:auto;}
   .footer-links{display:flex;gap:1.8rem;flex-wrap:wrap;}
   .footer-links a{text-decoration:none;font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;opacity:.8;}
   .footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding-top:1.6rem;}
@@ -141,7 +143,7 @@
   /* ---------- responsive ---------- */
   @media (max-width:860px){
     .hero-grid{grid-template-columns:1fr;}
-    .skyline-wrap{height:220px;order:-1;}
+    .hero-photo{height:240px;order:-1;}
     .nav-links,.nav-cta{display:none;}
     .nav-toggle{display:block;}
     .nav.open .nav-links{display:flex;position:absolute;top:64px;left:0;width:100%;background:var(--cream);
@@ -153,7 +155,6 @@
   @media (prefers-reduced-motion:reduce){
     [data-reveal]{opacity:1!important;transform:none!important;transition:none!important;}
     .hero h1 .word{animation:none;opacity:1;transform:none;}
-    .skyline path,.skyline rect,.skyline circle{animation:none;stroke-dashoffset:0;}
     .cta::before{animation:none;}
     .progress-bar{transition:none;}
   }
@@ -164,7 +165,7 @@
 <div class="progress-bar" id="progressBar"></div>
 
 <header class="nav" id="nav">
-  <a class="logo" href="#hero">Creativo<span>Milano</span></a>
+  <a class="logo" href="#hero"><img src="images/logo.png" alt="" class="logo-mark">Creativo<span>Milano</span></a>
   <nav class="nav-links">
     <a href="#services">Studio</a>
     <a href="#work">Work</a>
@@ -190,17 +191,10 @@
         </div>
       </div>
 
-      <!-- Signature skyline illustration. Purely decorative — safe to remove once real hero photography is added. -->
-      <div class="skyline-wrap" aria-hidden="true">
-        <svg class="skyline" viewBox="0 0 360 300" width="100%" height="100%">
-          <path d="M40 260 L40 140 L75 90 L110 140 L110 260" stroke="#0054A6" style="animation-delay:.1s"/>
-          <circle cx="190" cy="150" r="55" stroke="#F7941D" style="animation-delay:.3s"/>
-          <path d="M190 95 V150 M135 150 H245" stroke="#F7941D" style="animation-delay:.45s"/>
-          <path d="M270 260 V120 L290 60 L310 120 V260" stroke="#E2231A" style="animation-delay:.55s"/>
-          <path d="M20 260 H340" stroke="#18181A" style="animation-delay:.05s"/>
-          <path d="M150 260 V170 H170 V260 M200 260 V190 H225 V260" stroke="#00AEEF" style="animation-delay:.7s"/>
-          <path d="M310 260 C300 230 330 215 340 240" stroke="#39B54A" style="animation-delay:.85s"/>
-        </svg>
+      <!-- Real hero photography: a still from one of Creativo's digital experience museums. -->
+      <div class="hero-photo">
+        <img src="images/hero-bg.jpeg" alt="Visitors inside one of Creativo's immersive digital experience museums">
+        <span class="hero-photo-tag">Digital Experience Museum</span>
       </div>
     </div>
   </section>
@@ -259,47 +253,50 @@
     </div>
     <div class="project-grid">
 
-      <!-- Each .project-card below is a styled placeholder. Replace the inner ph-icon / ph-pattern divs
-           with <img src="your-photo.jpg" alt="..."> once real project photography is uploaded. -->
+      <!-- Real project photography. Swap any src="images/..." path to update a photo — sizing and labels stay put. -->
 
-      <div class="project-card" style="--c:var(--blue);--c-tint:#E6F1FB" data-reveal>
-        <div class="ph-pattern"></div>
-        <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 9 12 3l9 6"/><path d="M5 9v10M9 9v10M15 9v10M19 9v10"/><path d="M3 19h18"/></svg></div>
+      <div class="project-card" style="--c:var(--blue)" data-reveal>
+        <img src="images/ddm-museum.jpeg" alt="Immersive screens inside the DDM digital experience museum" loading="lazy">
         <div class="project-label"><div class="name">DDM — Digital Experience Museum</div><div class="meta">Museums · Türkiye</div></div>
       </div>
 
-      <div class="project-card" style="--c:var(--orange);--c-tint:#FDEFDC" data-reveal>
-        <div class="ph-pattern"></div>
-        <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="11" r="7"/><path d="M12 4v14M5 11h14"/></svg></div>
+      <div class="project-card" style="--c:var(--orange)" data-reveal>
+        <img src="images/phaetonia-land.jpeg" alt="Themed street and rollercoaster at Phaetonia Land" loading="lazy">
         <div class="project-label"><div class="name">Phaetonia Land</div><div class="meta">Theme parks</div></div>
       </div>
 
-      <div class="project-card" style="--c:var(--red);--c-tint:#FBE5E3" data-reveal>
-        <div class="ph-pattern"></div>
-        <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M10 21V9l2-5 2 5v12"/><path d="M7 21h10"/></svg></div>
+      <div class="project-card" style="--c:var(--red)" data-reveal>
+        <img src="images/karabakh-monument.jpeg" alt="Aerial view of the Karabakh Monument" loading="lazy">
         <div class="project-label"><div class="name">Karabakh Monument</div><div class="meta">Monuments · Azerbaijan</div></div>
       </div>
 
-      <div class="project-card" style="--c:var(--azure);--c-tint:#E1F6FD" data-reveal>
-        <div class="ph-pattern"></div>
-        <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 21V11h4v10M9 21V6h4v15M15 21V14h4v7"/></svg></div>
+      <div class="project-card" style="--c:var(--azure)" data-reveal>
+        <img src="images/festival-city.jpeg" alt="Sculptural arched facade of the Festival City building" loading="lazy">
         <div class="project-label"><div class="name">Festival City</div><div class="meta">Urban architecture</div></div>
       </div>
 
-      <div class="project-card" style="--c:var(--azure);--c-tint:#E1F6FD" data-reveal>
-        <div class="ph-pattern"></div>
-        <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 21V11h4v10M9 21V6h4v15M15 21V14h4v7"/></svg></div>
+      <div class="project-card" style="--c:var(--azure)" data-reveal>
+        <img src="images/campus-park.jpeg" alt="Aerial view of Campus Park's courts and playgrounds" loading="lazy">
         <div class="project-label"><div class="name">Campus Park</div><div class="meta">Urban architecture</div></div>
       </div>
 
-      <div class="project-card" style="--c:var(--orange);--c-tint:#FDEFDC" data-reveal>
-        <div class="ph-pattern"></div>
-        <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="11" r="7"/><path d="M12 4v14M5 11h14"/></svg></div>
+      <div class="project-card" style="--c:var(--orange)" data-reveal>
+        <img src="images/kids-town.jpeg" alt="Whimsical carriage and castle attraction at Kids Town" loading="lazy">
         <div class="project-label"><div class="name">Kids Town</div><div class="meta">Theme parks</div></div>
       </div>
 
+      <div class="project-card" style="--c:var(--orange)" data-reveal>
+        <img src="images/aqua-park.jpeg" alt="Aerial view of an aqua park resort with pools and slides" loading="lazy">
+        <div class="project-label"><div class="name">Aqua Park Resort</div><div class="meta">Theme parks</div></div>
+      </div>
+
+      <div class="project-card" style="--c:var(--blue)" data-reveal>
+        <img src="images/history-museum.jpeg" alt="Themed exhibit hall inside a history museum" loading="lazy">
+        <div class="project-label"><div class="name">History Museum</div><div class="meta">Museums</div></div>
+      </div>
+
     </div>
-    <p class="work-note">Placeholder artwork shown above — swap in real project photography any time, the layout will hold it perfectly.</p>
+    <p class="work-note">A selection from the studio's portfolio — more projects and full galleries available on request.</p>
   </section>
 
   <!-- ================= NUMBERS ================= -->
@@ -338,7 +335,7 @@
 
 <footer>
   <div class="footer-top">
-    <div class="footer-logo">Creativo Milano</div>
+    <div class="footer-logo"><img src="images/logo.png" alt="">Creativo Milano</div>
     <div class="footer-links">
       <a href="#services">Studio</a>
       <a href="#work">Work</a>
