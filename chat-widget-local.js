@@ -25,7 +25,7 @@
  *   constant below and re-uploading this file — no separate database.
  */
 
-const MODEL_ID = "onnx-community/SmolLM2-360M-Instruct";
+const MODEL_ID = "Xenova/Qwen1.5-0.5B-Chat";
 
 // ---- Knowledge base: keep this SHORT. Small models lose track of long context. ----
 // Edit freely — plain text, no code knowledge needed. Replace placeholders with real info.
