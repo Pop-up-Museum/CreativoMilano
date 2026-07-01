@@ -154,7 +154,7 @@ async function loadModel() {
   loadWrap.style.display = "block";
   try {
     // Loaded dynamically from CDN — no build step, no npm install needed.
-    const { pipeline } = await import("https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.0");
+    const { pipeline } = await import("https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.0/+esm");
 
     generator = await pipeline("text-generation", MODEL_ID, {
       dtype: "q4", // quantized for smaller download and faster CPU inference
