@@ -96,6 +96,11 @@
   .video-wrap{max-width:960px;margin:0 auto;border-radius:16px;overflow:hidden;position:relative;
     box-shadow:0 24px 60px -20px rgba(0,0,0,.25);}
   .video-wrap video{width:100%;display:block;}
+  .video-mute-btn{position:absolute;bottom:16px;right:16px;width:40px;height:40px;border-radius:50%;
+    background:rgba(24,24,26,.65);backdrop-filter:blur(6px);border:none;color:#fff;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;transition:transform .15s ease,background .2s ease;}
+  .video-mute-btn:hover{transform:scale(1.08);background:rgba(24,24,26,.85);}
+  .video-mute-btn svg{width:18px;height:18px;}
   .video-caption{margin-top:1.1rem;font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;
     letter-spacing:.05em;color:var(--ink-soft);}
   .video-placeholder{max-width:960px;margin:0 auto;aspect-ratio:16/9;border-radius:16px;
@@ -156,14 +161,14 @@
 
 <!-- ================= HERO ================= -->
 <section class="dante-hero">
-  <img src="images/hero-vr.jpg" alt="A visitor wearing a VR headset inside the Dante Immersive experience, lit in deep orange">
+  <img src="images/cathedral-banner.jpg" alt="Wide view of Florence Cathedral, the setting of the Dante Immersive experience">
   <div class="dante-hero-content" data-reveal>
     <p class="project-tag">Flagship project — Florence, 2026</p>
     <h1>Dante's Inferno,<br>made to walk through.</h1>
     <p class="sub">A full-scale immersive experience bringing the Divine Comedy to life through projection, sound, and virtual reality — designed and built by Creativo Milano in the heart of Florence.</p>
     <div class="hero-meta">
       <div><strong>Florence, Italy</strong>Location</div>
-      <div><strong>6 stages</strong>Immersive journey</div>
+      <div><strong>5 stages</strong>Immersive journey</div>
       <div><strong>Museums</strong>Discipline</div>
     </div>
   </div>
@@ -180,22 +185,10 @@
 
   <div class="stage" data-reveal>
     <div class="stage-media">
-      <img src="images/hero-vr.jpg" alt="Visitor equipped with a VR headset at the ticket office entrance">
-    </div>
-    <div class="stage-text">
-      <div class="stage-number" style="--c:var(--orange)">01 — Ticket Office</div>
-      <h2>The journey begins before you enter.</h2>
-      <p>Visitors are welcomed and equipped with VR headsets right from the entrance — the first signal that this is not a film to watch, but a world to step into.</p>
-      <span class="stage-tagline" style="--c:var(--orange)">Arrival</span>
-    </div>
-  </div>
-
-  <div class="stage" data-reveal>
-    <div class="stage-media">
       <img src="images/virgilio-panel.jpg" alt="Illustrated panel introducing Virgil, Dante's guide through the Inferno">
     </div>
     <div class="stage-text">
-      <div class="stage-number" style="--c:var(--red)">02 — Dark Forest</div>
+      <div class="stage-number" style="--c:var(--red)">01 — Dark Forest</div>
       <h2>Lost, before being found.</h2>
       <p>Guests step into the tangled dark wood where Dante's journey begins — disoriented, surrounded by shadow, before Virgil appears to guide the way forward.</p>
       <span class="stage-tagline" style="--c:var(--red)">Selva Oscura</span>
@@ -207,7 +200,7 @@
       <img src="images/caronte.jpg" alt="Projection of Charon the ferryman on his boat, crossing into the underworld">
     </div>
     <div class="stage-text">
-      <div class="stage-number" style="--c:var(--azure)">03 — Mirror Room</div>
+      <div class="stage-number" style="--c:var(--azure)">02 — Mirror Room</div>
       <h2>Reflections of the underworld.</h2>
       <p>A mirrored chamber multiplies Charon's crossing into infinity — the boundary between the living world and the Inferno, rendered as an endless, disorienting threshold.</p>
       <span class="stage-tagline" style="--c:var(--azure)">Sala degli Specchi</span>
@@ -219,7 +212,7 @@
       <img src="images/river-crossing.jpg" alt="Dante and Virgil on horseback crossing a river of blood, one of the circles of Hell">
     </div>
     <div class="stage-text">
-      <div class="stage-number" style="--c:var(--blue)">04 — Circles of Hell</div>
+      <div class="stage-number" style="--c:var(--blue)">03 — Circles of Hell</div>
       <h2>Nine circles, one descent.</h2>
       <p>From Limbo to the river of blood, each circle of the Inferno is staged as its own environment — guiding visitors deeper through Dante's vision of sin and consequence.</p>
       <span class="stage-tagline" style="--c:var(--blue)">Nove Cerchi</span>
@@ -231,7 +224,7 @@
       <img src="images/giants.jpg" alt="Massive projected chained giants towering over visitors in the immersive hall">
     </div>
     <div class="stage-text">
-      <div class="stage-number" style="--c:var(--green)">05 — Immersive Room</div>
+      <div class="stage-number" style="--c:var(--green)">04 — Immersive Room</div>
       <h2>Where the room becomes the story.</h2>
       <p>Floor-to-ceiling projection turns a historic Florentine hall into the gates of the giants — scale and sound designed to make the audience feel physically small before the myth.</p>
       <span class="stage-tagline" style="--c:var(--green)">Sala Immersiva</span>
@@ -240,10 +233,10 @@
 
   <div class="stage" data-reveal>
     <div class="stage-media">
-      <img src="images/audience-1.jpg" alt="A visitor experiencing the final VR room of the exhibition">
+      <img src="images/hero-vr.jpg" alt="A visitor wearing a VR headset during the final room of the exhibition">
     </div>
     <div class="stage-text">
-      <div class="stage-number" style="--c:var(--yellow)">06 — VR Room</div>
+      <div class="stage-number" style="--c:var(--yellow)">05 — VR Room</div>
       <h2>The final descent, in first person.</h2>
       <p>The experience closes with a personal VR sequence — after walking through the Inferno as an observer, each visitor faces its final circle alone, headset on, fully inside the vision.</p>
       <span class="stage-tagline" style="--c:var(--yellow)">Sala VR</span>
@@ -257,18 +250,14 @@
   <p class="eyebrow">Watch a preview</p>
   <h2>The experience, in motion.</h2>
 
-  <!--
-    Video placeholder: drop your video file into the images/ folder (or a dedicated /video folder)
-    and replace this whole .video-placeholder block with the commented-out <div class="video-wrap"> below.
-    Keep the file reasonably compressed (a few MB) so the page still loads quickly.
-  -->
- <div class="video-wrap">
-  <video autoplay muted loop playsinline poster="images/hero-vr.jpg">
-    <source src="YTDown_YouTube_Inferno-Esperienza-Immersiva-nella-Divin_Media_bvhgjoAPsgY_001_1080p.mp4" type="video/mp4">
-  </video>
-</div>
+  <div class="video-wrap" id="danteVideoWrap">
+    <video id="danteVideo" loop playsinline muted poster="images/hero-vr.jpg">
+      <source src="YTDown_YouTube_Inferno-Esperienza-Immersiva-nella-Divin_Media_bvhgjoAPsgY_001_1080p.mp4" type="video/mp4">
+    </video>
+    <button class="video-mute-btn" id="danteMuteBtn" type="button" aria-label="Unmute video"></button>
+  </div>
 
-  <p class="video-caption">Looping preview — sound off by default, as on the rest of the site</p>
+  <p class="video-caption">Plays automatically as you scroll — sound turns on only while the video is on screen</p>
 </section>
 
 <!-- ================= GALLERY ================= -->
@@ -303,7 +292,7 @@
     </div>
     <div class="practical-item">
       <div class="label">Journey</div>
-      <div class="value">6 stages</div>
+      <div class="value">5 stages</div>
     </div>
   </div>
   <div class="practical-cta">
@@ -331,6 +320,62 @@
     });
   }, {threshold:.15});
   reveal.forEach(el=>io.observe(el));
+
+  // ---- Dante preview video: plays only while on screen, sound only while visible ----
+  const danteVideo = document.getElementById('danteVideo');
+  const danteMuteBtn = document.getElementById('danteMuteBtn');
+
+  if (danteVideo && danteMuteBtn) {
+    const ICON_MUTED = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 5V4L8 9H4Z"/><path d="M16 9l5 5M21 9l-5 5"/></svg>';
+    const ICON_ON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 5V4L8 9H4Z"/><path d="M16 8a5 5 0 0 1 0 8"/><path d="M19 5a9 9 0 0 1 0 14"/></svg>';
+
+    let userInteracted = false;
+    let isVisible = false;
+
+    function refreshMuteIcon() {
+      danteMuteBtn.innerHTML = danteVideo.muted ? ICON_MUTED : ICON_ON;
+      danteMuteBtn.setAttribute('aria-label', danteVideo.muted ? 'Unmute video' : 'Mute video');
+    }
+    refreshMuteIcon();
+
+    // Any real click/tap/keydown on the page counts as the interaction browsers require before allowing sound.
+    function unlockAudio() {
+      userInteracted = true;
+      if (isVisible) {
+        danteVideo.muted = false;
+        refreshMuteIcon();
+      }
+    }
+    ['click', 'keydown', 'touchstart'].forEach(evt => {
+      document.addEventListener(evt, unlockAudio, { once: true, passive: true });
+    });
+
+    // Manual override: visitor can mute/unmute directly regardless of scroll position.
+    danteMuteBtn.addEventListener('click', () => {
+      userInteracted = true;
+      danteVideo.muted = !danteVideo.muted;
+      refreshMuteIcon();
+    });
+
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        isVisible = entry.isIntersecting;
+        if (entry.isIntersecting) {
+          danteVideo.play().catch(() => {});
+          if (userInteracted) {
+            danteVideo.muted = false;
+            refreshMuteIcon();
+          }
+        } else {
+          danteVideo.muted = true;
+          danteVideo.pause();
+          refreshMuteIcon();
+        }
+      });
+    }, { threshold: 0.6 });
+
+    videoObserver.observe(document.getElementById('danteVideoWrap'));
+  }
 </script>
 
 </body>
