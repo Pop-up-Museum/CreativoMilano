@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dante Immersive — Creativo Milano</title>
+<meta name="description" content="Dante's Inferno Immersive Experience, Florence — a Creativo Milano flagship project.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23FCB040'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FAF8F3; --white:#FFFFFF; --ink:#18181A; --ink-soft:#5C5C57; --line:#E5E1D6;
+    --red:#BF1E2E; --orange:#F1592A; --yellow:#FCB040; --green:#8CC63F; --azure:#25AAE1; --blue:#0F75BC;
+    --font-display:'Space Grotesk',sans-serif; --font-serif:'Cormorant Garamond',serif;
+    --font-body:'Inter',sans-serif; --font-mono:'JetBrains Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--font-body);color:var(--ink);background:var(--cream);line-height:1.6;overflow-x:hidden;}
+  img,video{display:block;max-width:100%;}
+  a{color:inherit;}
+  section{position:relative;}
+
+  [data-reveal]{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease;}
+  [data-reveal].in-view{opacity:1;transform:translateY(0);}
+
+  /* ---------- nav ---------- */
+  .nav{position:fixed;top:0;left:0;width:100%;z-index:900;display:flex;align-items:center;justify-content:space-between;
+    padding:20px 6%;background:rgba(250,248,243,.92);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line);}
+  .logo{font-family:var(--font-display);font-weight:700;font-size:1.1rem;letter-spacing:-.02em;text-decoration:none;
+    display:flex;align-items:center;gap:.5rem;}
+  .logo img{height:24px;width:auto;}
+  .logo span{color:var(--blue);font-weight:500;}
+  .back-link{font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;
+    text-decoration:none;color:var(--ink);opacity:.75;transition:opacity .2s ease;display:flex;align-items:center;gap:.4rem;}
+  .back-link:hover{opacity:1;}
+
+  /* ---------- hero ---------- */
+  .dante-hero{min-height:92vh;display:flex;align-items:flex-end;position:relative;margin-top:0;}
+  .dante-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;}
+  .dante-hero::after{content:'';position:absolute;inset:0;
+    background:linear-gradient(0deg,rgba(24,24,26,.88) 0%,rgba(24,24,26,.35) 55%,rgba(24,24,26,.15) 100%);}
+  .dante-hero-content{position:relative;z-index:2;padding:6rem 6% 4.5rem;max-width:820px;color:var(--cream);}
+  .project-tag{font-family:var(--font-mono);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--yellow);margin-bottom:1.4rem;display:flex;align-items:center;gap:.6rem;}
+  .project-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);}
+  .dante-hero h1{font-family:var(--font-serif);font-weight:600;font-style:italic;
+    font-size:clamp(2.4rem,6.4vw,4.8rem);line-height:1.08;margin-bottom:1.3rem;}
+  .dante-hero .sub{font-size:1.02rem;color:rgba(250,248,243,.85);max-width:520px;margin-bottom:1.8rem;}
+  .hero-meta{display:flex;gap:2.2rem;flex-wrap:wrap;font-family:var(--font-mono);font-size:.72rem;
+    text-transform:uppercase;letter-spacing:.04em;color:rgba(250,248,243,.7);}
+  .hero-meta strong{color:var(--cream);display:block;font-family:var(--font-body);font-size:.95rem;
+    text-transform:none;letter-spacing:0;font-weight:600;margin-bottom:.2rem;}
+
+  /* ---------- intro strip ---------- */
+  .intro{padding:5.5rem 6% 3.5rem;max-width:760px;margin:0 auto;text-align:center;}
+  .intro p{font-family:var(--font-serif);font-size:clamp(1.25rem,2.4vw,1.6rem);font-style:italic;color:var(--ink);
+    line-height:1.55;}
+  .intro .credit{margin-top:1.4rem;font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;
+    letter-spacing:.05em;color:var(--ink-soft);}
+
+  /* ---------- journey sections ---------- */
+  .journey{padding:1rem 0 5rem;}
+  .stage{display:grid;grid-template-columns:1fr 1fr;min-height:80vh;align-items:center;gap:0;
+    border-top:1px solid var(--line);}
+  .stage:nth-child(even){direction:rtl;}
+  .stage:nth-child(even) .stage-text{direction:ltr;}
+  .stage-media{position:relative;height:100%;min-height:64vh;overflow:hidden;}
+  .stage-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+  .stage:hover .stage-media img{transform:scale(1.04);}
+  .stage-text{padding:3.5rem 7%;}
+  .stage-number{font-family:var(--font-mono);font-size:.75rem;color:var(--c,var(--orange));
+    letter-spacing:.1em;margin-bottom:1rem;}
+  .stage-text h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.6rem,3vw,2.2rem);
+    margin-bottom:1.1rem;letter-spacing:-.01em;color:var(--ink);}
+  .stage-text p{color:var(--ink-soft);font-size:.98rem;max-width:440px;}
+  .stage-tagline{display:inline-block;margin-top:1.3rem;font-family:var(--font-mono);font-size:.7rem;
+    text-transform:uppercase;letter-spacing:.05em;color:var(--c,var(--orange));border:1px solid currentColor;
+    padding:.4rem .9rem;border-radius:30px;}
+
+  @media (max-width:860px){
+    .stage,.stage:nth-child(even){grid-template-columns:1fr;direction:ltr;}
+    .stage-media{min-height:40vh;}
+    .stage-text{padding:2.4rem 6%;}
+  }
+
+  /* ---------- video loop section ---------- */
+  .video-section{padding:5.5rem 6%;text-align:center;background:var(--white);border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);}
+  .video-section .eyebrow{font-family:var(--font-mono);font-size:.76rem;text-transform:uppercase;
+    letter-spacing:.1em;color:var(--azure);margin-bottom:1rem;}
+  .video-section h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.7rem,3.2vw,2.4rem);
+    margin-bottom:2.2rem;color:var(--ink);}
+  .video-wrap{max-width:960px;margin:0 auto;border-radius:16px;overflow:hidden;position:relative;
+    box-shadow:0 24px 60px -20px rgba(0,0,0,.25);}
+  .video-wrap video{width:100%;display:block;}
+  .video-caption{margin-top:1.1rem;font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;
+    letter-spacing:.05em;color:var(--ink-soft);}
+  .video-placeholder{max-width:960px;margin:0 auto;aspect-ratio:16/9;border-radius:16px;
+    background:var(--cream);border:1px dashed var(--line);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;color:var(--ink-soft);}
+  .video-placeholder svg{width:40px;height:40px;opacity:.4;}
+  .video-placeholder p{font-family:var(--font-mono);font-size:.76rem;max-width:380px;text-align:center;}
+
+  /* ---------- gallery ---------- */
+  .gallery{padding:5.5rem 6%;}
+  .gallery-head{text-align:center;margin-bottom:2.4rem;}
+  .gallery-head h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.6rem,3vw,2.2rem);color:var(--ink);}
+  .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:160px;gap:10px;max-width:1100px;margin:0 auto;}
+  .gallery-grid img{width:100%;height:100%;object-fit:cover;border-radius:10px;cursor:pointer;
+    transition:transform .3s ease,filter .3s ease;}
+  .gallery-grid img:hover{transform:scale(1.03);filter:brightness(1.05);}
+  .g-tall{grid-row:span 2;}
+  @media (max-width:760px){
+    .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:140px;}
+  }
+
+  /* ---------- info / CTA ---------- */
+  .practical{padding:5.5rem 6%;background:var(--white);border-top:1px solid var(--line);}
+  .practical-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;
+    max-width:1000px;margin:0 auto 3rem;}
+  .practical-item .label{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;
+    letter-spacing:.05em;color:var(--blue);margin-bottom:.5rem;}
+  .practical-item .value{font-family:var(--font-display);font-weight:600;font-size:1.1rem;color:var(--ink);}
+  .practical-cta{text-align:center;}
+  .practical-cta h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.6rem,3vw,2.2rem);
+    margin-bottom:1rem;color:var(--ink);}
+  .practical-cta p{color:var(--ink-soft);max-width:480px;margin:0 auto 2rem;}
+  .btn-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+  .btn-primary{font-family:var(--font-mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;
+    background:var(--red);color:#fff;padding:1rem 1.8rem;border-radius:40px;text-decoration:none;
+    display:inline-block;transition:transform .25s ease,box-shadow .25s ease;}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 24px -12px rgba(191,30,46,.35);}
+  .btn-secondary{font-family:var(--font-mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;
+    background:transparent;color:var(--ink);padding:1rem 1.8rem;border-radius:40px;text-decoration:none;
+    border:1px solid var(--ink);display:inline-block;transition:background .25s ease,color .25s ease;}
+  .btn-secondary:hover{background:var(--ink);color:var(--cream);}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.6);padding:2.2rem 6%;text-align:center;
+    font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;}
+  footer a{text-decoration:underline;color:rgba(255,255,255,.8);}
+
+  @media (prefers-reduced-motion:reduce){
+    [data-reveal]{opacity:1!important;transform:none!important;transition:none!important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="logo" href="creativo-milano-landing.html"><img src="images/logo.png" alt="">Creativo<span>Milano</span></a>
+  <a class="back-link" href="creativo-milano-landing.html#work">← Back to projects</a>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="dante-hero">
+  <img src="images/hero-vr.jpg" alt="A visitor wearing a VR headset inside the Dante Immersive experience, lit in deep orange">
+  <div class="dante-hero-content" data-reveal>
+    <p class="project-tag">Flagship project — Florence, 2026</p>
+    <h1>Dante's Inferno,<br>made to walk through.</h1>
+    <p class="sub">A full-scale immersive experience bringing the Divine Comedy to life through projection, sound, and virtual reality — designed and built by Creativo Milano in the heart of Florence.</p>
+    <div class="hero-meta">
+      <div><strong>Florence, Italy</strong>Location</div>
+      <div><strong>6 stages</strong>Immersive journey</div>
+      <div><strong>Museums</strong>Discipline</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INTRO ================= -->
+<section class="intro" data-reveal>
+  <p>"Nel mezzo del cammin di nostra vita, mi ritrovai per una selva oscura..."</p>
+  <div class="credit">Dante Alighieri, Inferno — Canto I</div>
+</section>
+
+<!-- ================= JOURNEY ================= -->
+<section class="journey">
+
+  <div class="stage" data-reveal>
+    <div class="stage-media">
+      <img src="images/hero-vr.jpg" alt="Visitor equipped with a VR headset at the ticket office entrance">
+    </div>
+    <div class="stage-text">
+      <div class="stage-number" style="--c:var(--orange)">01 — Ticket Office</div>
+      <h2>The journey begins before you enter.</h2>
+      <p>Visitors are welcomed and equipped with VR headsets right from the entrance — the first signal that this is not a film to watch, but a world to step into.</p>
+      <span class="stage-tagline" style="--c:var(--orange)">Arrival</span>
+    </div>
+  </div>
+
+  <div class="stage" data-reveal>
+    <div class="stage-media">
+      <img src="images/virgilio-panel.jpg" alt="Illustrated panel introducing Virgil, Dante's guide through the Inferno">
+    </div>
+    <div class="stage-text">
+      <div class="stage-number" style="--c:var(--red)">02 — Dark Forest</div>
+      <h2>Lost, before being found.</h2>
+      <p>Guests step into the tangled dark wood where Dante's journey begins — disoriented, surrounded by shadow, before Virgil appears to guide the way forward.</p>
+      <span class="stage-tagline" style="--c:var(--red)">Selva Oscura</span>
+    </div>
+  </div>
+
+  <div class="stage" data-reveal>
+    <div class="stage-media">
+      <img src="images/caronte.jpg" alt="Projection of Charon the ferryman on his boat, crossing into the underworld">
+    </div>
+    <div class="stage-text">
+      <div class="stage-number" style="--c:var(--azure)">03 — Mirror Room</div>
+      <h2>Reflections of the underworld.</h2>
+      <p>A mirrored chamber multiplies Charon's crossing into infinity — the boundary between the living world and the Inferno, rendered as an endless, disorienting threshold.</p>
+      <span class="stage-tagline" style="--c:var(--azure)">Sala degli Specchi</span>
+    </div>
+  </div>
+
+  <div class="stage" data-reveal>
+    <div class="stage-media">
+      <img src="images/river-crossing.jpg" alt="Dante and Virgil on horseback crossing a river of blood, one of the circles of Hell">
+    </div>
+    <div class="stage-text">
+      <div class="stage-number" style="--c:var(--blue)">04 — Circles of Hell</div>
+      <h2>Nine circles, one descent.</h2>
+      <p>From Limbo to the river of blood, each circle of the Inferno is staged as its own environment — guiding visitors deeper through Dante's vision of sin and consequence.</p>
+      <span class="stage-tagline" style="--c:var(--blue)">Nove Cerchi</span>
+    </div>
+  </div>
+
+  <div class="stage" data-reveal>
+    <div class="stage-media">
+      <img src="images/giants.jpg" alt="Massive projected chained giants towering over visitors in the immersive hall">
+    </div>
+    <div class="stage-text">
+      <div class="stage-number" style="--c:var(--green)">05 — Immersive Room</div>
+      <h2>Where the room becomes the story.</h2>
+      <p>Floor-to-ceiling projection turns a historic Florentine hall into the gates of the giants — scale and sound designed to make the audience feel physically small before the myth.</p>
+      <span class="stage-tagline" style="--c:var(--green)">Sala Immersiva</span>
+    </div>
+  </div>
+
+  <div class="stage" data-reveal>
+    <div class="stage-media">
+      <img src="images/audience-1.jpg" alt="A visitor experiencing the final VR room of the exhibition">
+    </div>
+    <div class="stage-text">
+      <div class="stage-number" style="--c:var(--yellow)">06 — VR Room</div>
+      <h2>The final descent, in first person.</h2>
+      <p>The experience closes with a personal VR sequence — after walking through the Inferno as an observer, each visitor faces its final circle alone, headset on, fully inside the vision.</p>
+      <span class="stage-tagline" style="--c:var(--yellow)">Sala VR</span>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================= VIDEO LOOP ================= -->
+<section class="video-section" data-reveal>
+  <p class="eyebrow">Watch a preview</p>
+  <h2>The experience, in motion.</h2>
+
+  <!--
+    Video placeholder: drop your video file into the images/ folder (or a dedicated /video folder)
+    and replace this whole .video-placeholder block with the commented-out <div class="video-wrap"> below.
+    Keep the file reasonably compressed (a few MB) so the page still loads quickly.
+  -->
+  <div class="video-placeholder">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m10 9 5 3-5 3Z"/></svg>
+    <p>Video not embedded yet — add the file to the project folder and update the &lt;video&gt; source below.</p>
+  </div>
+
+  <!--
+  <div class="video-wrap">
+    <video autoplay muted loop playsinline poster="images/hero-vr.jpg">
+      <source src="images/dante-preview.mp4" type="video/mp4">
+    </video>
+  </div>
+  -->
+
+  <p class="video-caption">Looping preview — sound off by default, as on the rest of the site</p>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section class="gallery" data-reveal>
+  <div class="gallery-head">
+    <h2>Inside the experience</h2>
+  </div>
+  <div class="gallery-grid">
+    <img class="g-tall" src="images/hero-vr.jpg" alt="Visitor wearing a VR headset" loading="lazy">
+    <img src="images/caronte.jpg" alt="Charon projection" loading="lazy">
+    <img src="images/river-crossing.jpg" alt="River of blood crossing scene" loading="lazy">
+    <img class="g-tall" src="images/giants.jpg" alt="Giants projection in the immersive hall" loading="lazy">
+    <img src="images/audience-1.jpg" alt="Visitors watching the experience" loading="lazy">
+    <img src="images/audience-2.jpg" alt="Visitors immersed in the exhibition" loading="lazy">
+  </div>
+</section>
+
+<!-- ================= PRACTICAL INFO + CTA ================= -->
+<section class="practical" data-reveal>
+  <div class="practical-grid">
+    <div class="practical-item">
+      <div class="label">Location</div>
+      <div class="value">Florence, Italy</div>
+    </div>
+    <div class="practical-item">
+      <div class="label">Discipline</div>
+      <div class="value">Museums</div>
+    </div>
+    <div class="practical-item">
+      <div class="label">Format</div>
+      <div class="value">Projection + VR</div>
+    </div>
+    <div class="practical-item">
+      <div class="label">Journey</div>
+      <div class="value">6 stages</div>
+    </div>
+  </div>
+  <div class="practical-cta">
+    <h2>Want something like this for your space?</h2>
+    <p>Dante Immersive is one example of what Creativo Milano designs and builds — from concept to full technical delivery.</p>
+    <div class="btn-row">
+      <a class="btn-primary" href="creativo-milano-landing.html#contact">Start a project</a>
+      <a class="btn-secondary" href="creativo-milano-landing.html#work">See more projects</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Creativo Milano — part of the <a href="https://www.outdoorfactory.com" target="_blank" rel="noopener">Outdoor Factory</a> group · Project reference: <a href="https://danteimmersive.com" target="_blank" rel="noopener">danteimmersive.com</a></p>
+</footer>
+
+<script>
+  const reveal = document.querySelectorAll('[data-reveal]');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:.15});
+  reveal.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
