@@ -131,10 +131,12 @@
 
   /* ---------- footer ---------- */
   footer{background:var(--ink);color:rgba(255,255,255,.62);padding:3rem 6% 2rem;font-size:.85rem;}
-  .footer-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;
+  .footer-top{display:flex;flex-direction:column;align-items:flex-start;gap:1.6rem;
     padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.12);}
-  .footer-logo{font-family:var(--font-display);color:#fff;font-weight:700;font-size:1.1rem;display:flex;align-items:center;gap:.5rem;}
-  .footer-logo img{height:24px;width:auto;}
+  .footer-logo{display:flex;align-items:center;gap:.7rem;}
+  .footer-logo img{height:44px;width:auto;}
+  .footer-logo .wordmark{font-family:var(--font-display);color:#fff;font-weight:700;font-size:1.4rem;}
+  .footer-nav-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;width:100%;}
   .footer-links{display:flex;gap:1.8rem;flex-wrap:wrap;}
   .footer-links a{text-decoration:none;font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;opacity:.8;}
   .footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding-top:1.6rem;}
@@ -165,7 +167,7 @@
 <div class="progress-bar" id="progressBar"></div>
 
 <header class="nav" id="nav">
-  <a class="logo" href="#hero"><img src="images/logo.png" alt="" class="logo-mark">Creativo<span>Milano</span></a>
+  <a class="logo" href="#hero">Creativo<span>Milano</span></a>
   <nav class="nav-links">
     <a href="#services">Studio</a>
     <a href="#work">Work</a>
@@ -341,12 +343,14 @@
 
 <footer>
   <div class="footer-top">
-    <div class="footer-logo"><img src="images/logo.png" alt="">Creativo Milano</div>
-    <div class="footer-links">
-      <a href="#services">Studio</a>
-      <a href="#work">Work</a>
-      <a href="#numbers">About</a>
-      <a href="#contact">Contact</a>
+    <div class="footer-logo"><img src="images/logo.png" alt=""><span class="wordmark">Creativo Milano</span></div>
+    <div class="footer-nav-row">
+      <div class="footer-links">
+        <a href="#services">Studio</a>
+        <a href="#work">Work</a>
+        <a href="#numbers">About</a>
+        <a href="#contact">Contact</a>
+      </div>
     </div>
   </div>
   <div class="footer-bottom">

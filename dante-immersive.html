@@ -143,9 +143,13 @@
     border:1px solid var(--ink);display:inline-block;transition:background .25s ease,color .25s ease;}
   .btn-secondary:hover{background:var(--ink);color:var(--cream);}
 
-  footer{background:var(--ink);color:rgba(255,255,255,.6);padding:2.2rem 6%;text-align:center;
+  footer{background:var(--ink);color:rgba(255,255,255,.6);padding:2.6rem 6% 2.2rem;text-align:center;
     font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;}
   footer a{text-decoration:underline;color:rgba(255,255,255,.8);}
+  .footer-logo{display:flex;align-items:center;justify-content:center;gap:.7rem;margin-bottom:1.2rem;}
+  .footer-logo img{height:44px;width:auto;}
+  .footer-logo span{font-family:var(--font-display);color:#fff;font-weight:700;font-size:1.4rem;
+    text-transform:none;letter-spacing:0;}
 
   @media (prefers-reduced-motion:reduce){
     [data-reveal]{opacity:1!important;transform:none!important;transition:none!important;}
@@ -155,7 +159,7 @@
 <body>
 
 <header class="nav">
-  <a class="logo" href="creativo-milano-landing.html"><img src="images/logo.png" alt="">Creativo<span>Milano</span></a>
+  <a class="logo" href="creativo-milano-landing.html">Creativo<span>Milano</span></a>
   <a class="back-link" href="creativo-milano-landing.html#work">← Back to projects</a>
 </header>
 
@@ -306,6 +310,7 @@
 </section>
 
 <footer>
+  <div class="footer-logo"><img src="images/logo.png" alt=""><span>Creativo Milano</span></div>
   <p>Creativo Milano — part of the <a href="https://www.outdoorfactory.com" target="_blank" rel="noopener">Outdoor Factory</a> group · Project reference: <a href="https://danteimmersive.com" target="_blank" rel="noopener">danteimmersive.com</a></p>
 </footer>
 
