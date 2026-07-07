@@ -151,6 +151,27 @@
   .footer-logo span{font-family:var(--font-display);color:#fff;font-weight:700;font-size:1.4rem;
     text-transform:none;letter-spacing:0;}
 
+  /* ---------- lightbox ---------- */
+  .lightbox-overlay{position:fixed;inset:0;background:rgba(10,10,10,.92);z-index:9999;
+    display:flex;align-items:center;justify-content:center;padding:5vh 5vw;
+    opacity:0;pointer-events:none;transition:opacity .25s ease;}
+  .lightbox-overlay.open{opacity:1;pointer-events:auto;}
+  .lightbox-overlay img{max-width:100%;max-height:100%;border-radius:8px;
+    box-shadow:0 24px 70px rgba(0,0,0,.5);}
+  .lightbox-close,.lightbox-nav{position:absolute;border:none;color:#fff;cursor:pointer;
+    background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;
+    transition:background .2s ease,transform .2s ease;}
+  .lightbox-close:hover,.lightbox-nav:hover{background:rgba(255,255,255,.25);}
+  .lightbox-close{top:24px;right:24px;width:44px;height:44px;border-radius:50%;}
+  .lightbox-nav{top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;}
+  .lightbox-nav:hover{transform:translateY(-50%) scale(1.06);}
+  .lightbox-prev{left:16px;} .lightbox-next{right:16px;}
+  .lightbox-close svg,.lightbox-nav svg{width:20px;height:20px;}
+  @media (max-width:600px){
+    .lightbox-nav{width:38px;height:38px;} .lightbox-close{width:38px;height:38px;top:14px;right:14px;}
+    .lightbox-prev{left:8px;} .lightbox-next{right:8px;}
+  }
+
   @media (prefers-reduced-motion:reduce){
     [data-reveal]{opacity:1!important;transform:none!important;transition:none!important;}
   }
@@ -381,6 +402,58 @@
 
     videoObserver.observe(document.getElementById('danteVideoWrap'));
   }
+
+  // ---------- lightbox: click any gallery photo to view it larger, arrows/keys to browse ----------
+  (function(){
+    const items = Array.from(document.querySelectorAll('.project-grid img, .gallery-grid img'));
+    if(!items.length) return;
+    let current = 0;
+
+    const overlay = document.createElement('div');
+    overlay.className = 'lightbox-overlay';
+    overlay.innerHTML = `
+      <button class="lightbox-close" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <button class="lightbox-nav lightbox-prev" aria-label="Previous photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <img src="" alt="">
+      <button class="lightbox-nav lightbox-next" aria-label="Next photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      </button>`;
+    document.body.appendChild(overlay);
+
+    const imgEl = overlay.querySelector('img');
+    const closeBtn = overlay.querySelector('.lightbox-close');
+    const prevBtn = overlay.querySelector('.lightbox-prev');
+    const nextBtn = overlay.querySelector('.lightbox-next');
+
+    function show(i){
+      current = (i + items.length) % items.length;
+      imgEl.src = items[current].currentSrc || items[current].src;
+      imgEl.alt = items[current].alt || '';
+    }
+    function openBox(i){ show(i); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeBox(){ overlay.classList.remove('open'); document.body.style.overflow = ''; }
+
+    items.forEach((img, i) => {
+      if(img.closest('a[href]')) return;
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => openBox(i));
+    });
+
+    closeBtn.addEventListener('click', closeBox);
+    overlay.addEventListener('click', (e) => { if(e.target === overlay) closeBox(); });
+    prevBtn.addEventListener('click', () => show(current - 1));
+    nextBtn.addEventListener('click', () => show(current + 1));
+    document.addEventListener('keydown', (e) => {
+      if(!overlay.classList.contains('open')) return;
+      if(e.key === 'Escape') closeBox();
+      if(e.key === 'ArrowLeft') show(current - 1);
+      if(e.key === 'ArrowRight') show(current + 1);
+    });
+  })();
 </script>
 
 </body>
