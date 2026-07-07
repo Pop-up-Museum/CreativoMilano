@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Theme Park Maintenance — Creativo Milano</title>
+<meta name="description" content="Full lifecycle theme park maintenance by Creativo Milano — technical care, safety inspections, seasonal servicing and refurbishment.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23FCB040'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FAF8F3; --white:#FFFFFF; --ink:#18181A; --ink-soft:#5C5C57; --line:#E5E1D6;
+    --red:#BF1E2E; --orange:#F1592A; --yellow:#FCB040; --green:#8CC63F; --azure:#25AAE1; --blue:#0F75BC;
+    --font-display:'Space Grotesk',sans-serif; --font-body:'Inter',sans-serif; --font-mono:'JetBrains Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--font-body);color:var(--ink);background:var(--cream);line-height:1.6;overflow-x:hidden;}
+  img{display:block;max-width:100%;}
+  a{color:inherit;}
+  section{position:relative;}
+
+  [data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+  [data-reveal].in-view{opacity:1;transform:translateY(0);}
+
+  /* ---------- nav ---------- */
+  .nav{position:fixed;top:0;left:0;width:100%;z-index:900;display:flex;align-items:center;justify-content:space-between;
+    padding:20px 6%;background:rgba(250,248,243,.92);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line);}
+  .logo{font-family:var(--font-display);font-weight:700;font-size:1.1rem;letter-spacing:-.02em;text-decoration:none;}
+  .logo span{color:var(--blue);font-weight:500;}
+  .back-link{font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;
+    text-decoration:none;color:var(--ink);opacity:.75;transition:opacity .2s ease;}
+  .back-link:hover{opacity:1;}
+
+  /* ---------- hero ---------- */
+  .park-hero{min-height:88vh;display:flex;align-items:flex-end;position:relative;}
+  .park-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .park-hero::after{content:'';position:absolute;inset:0;
+    background:linear-gradient(0deg,rgba(24,24,26,.85) 0%,rgba(24,24,26,.3) 55%,rgba(24,24,26,.1) 100%);}
+  .park-hero-content{position:relative;z-index:2;padding:6rem 6% 4.5rem;max-width:780px;color:var(--cream);}
+  .eyebrow-tag{font-family:var(--font-mono);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--yellow);margin-bottom:1.4rem;display:flex;align-items:center;gap:.6rem;}
+  .eyebrow-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);}
+  .park-hero h1{font-family:var(--font-display);font-weight:700;font-size:clamp(2.2rem,5.6vw,4rem);
+    line-height:1.08;margin-bottom:1.3rem;letter-spacing:-.02em;}
+  .park-hero .sub{font-size:1.02rem;color:rgba(250,248,243,.85);max-width:520px;}
+
+  /* ---------- intro ---------- */
+  .intro-block{padding:5.5rem 6% 2rem;max-width:760px;margin:0 auto;text-align:center;}
+  .intro-block p{font-size:1.1rem;color:var(--ink-soft);line-height:1.7;}
+
+  /* ---------- services grid ---------- */
+  .maint-services{padding:3rem 6% 5.5rem;}
+  .section-head{max-width:620px;margin:0 auto 3rem;text-align:center;}
+  .section-head h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.8rem,3.6vw,2.6rem);letter-spacing:-.01em;}
+  .service-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem;max-width:1180px;margin:0 auto;}
+  .service-card{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:2rem 1.6rem;
+    position:relative;overflow:hidden;transition:transform .3s ease,box-shadow .3s ease;}
+  .service-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--c);
+    transform:scaleX(0);transform-origin:left;transition:transform .35s ease;}
+  .service-card:hover{transform:translateY(-6px);box-shadow:0 18px 32px -18px rgba(0,0,0,.14);}
+  .service-card:hover::before{transform:scaleX(1);}
+  .service-icon{width:36px;height:36px;color:var(--c);margin-bottom:1.3rem;}
+  .service-card h3{font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:.5rem;}
+  .service-card p{font-size:.9rem;color:var(--ink-soft);}
+
+  /* ---------- process strip ---------- */
+  .process{padding:5.5rem 6%;background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .process-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2rem;max-width:1000px;margin:2.6rem auto 0;}
+  .process-step{text-align:center;}
+  .process-step .num{font-family:var(--font-display);font-weight:700;font-size:1.8rem;color:var(--c,var(--blue));margin-bottom:.6rem;}
+  .process-step h4{font-family:var(--font-display);font-weight:600;font-size:.95rem;margin-bottom:.4rem;}
+  .process-step p{font-size:.85rem;color:var(--ink-soft);}
+
+  /* ---------- gallery / parks we care for ---------- */
+  .cared-parks{padding:5.5rem 6%;}
+  .project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.3rem;max-width:1100px;margin:2.6rem auto 0;}
+  .project-card{border-radius:16px;overflow:hidden;aspect-ratio:4/3;position:relative;background:var(--ink);}
+  .project-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+  .project-card:hover img{transform:scale(1.06);}
+  .project-card::after{content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.6) 100%);}
+  .project-label{position:absolute;left:0;right:0;bottom:0;padding:1rem 1.1rem;z-index:2;}
+  .project-label .name{font-family:var(--font-display);font-weight:600;font-size:.92rem;color:#fff;}
+  .project-label .meta{font-family:var(--font-mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--yellow);margin-top:.2rem;}
+
+  /* ---------- cta ---------- */
+  .park-cta{padding:6.5rem 6%;text-align:center;background:var(--blue);color:var(--cream);overflow:hidden;position:relative;}
+  .park-cta::before{content:'';position:absolute;inset:-30%;
+    background:conic-gradient(from 0deg,var(--red),var(--orange),var(--yellow),var(--green),var(--azure),var(--blue),var(--red));
+    opacity:.16;filter:blur(70px);animation:spin 32s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .park-cta-content{position:relative;z-index:2;max-width:600px;margin:0 auto;}
+  .park-cta h2{font-family:var(--font-display);font-weight:700;font-size:clamp(1.9rem,4.4vw,2.8rem);margin-bottom:1.1rem;}
+  .park-cta p{font-size:1rem;opacity:.85;margin-bottom:2.2rem;}
+  .btn-primary{font-family:var(--font-mono);font-size:.82rem;text-transform:uppercase;letter-spacing:.04em;
+    background:var(--yellow);color:var(--ink);padding:1rem 1.8rem;border-radius:40px;text-decoration:none;
+    display:inline-block;transition:transform .25s ease,box-shadow .25s ease;}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 24px -12px rgba(0,0,0,.25);}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.6);padding:2.6rem 6% 2.2rem;text-align:center;
+    font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;}
+  footer a{text-decoration:underline;color:rgba(255,255,255,.8);}
+  .footer-logo{display:flex;align-items:center;justify-content:center;gap:.7rem;margin-bottom:1.2rem;}
+  .footer-logo img{height:44px;width:auto;}
+  .footer-logo span{font-family:var(--font-display);color:#fff;font-weight:700;font-size:1.4rem;
+    text-transform:none;letter-spacing:0;}
+
+  @media (prefers-reduced-motion:reduce){
+    [data-reveal]{opacity:1!important;transform:none!important;transition:none!important;}
+    .park-cta::before{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="logo" href="creativo-milano-landing.html">Creativo<span>Milano</span></a>
+  <a class="back-link" href="creativo-milano-landing.html#services">← Back to services</a>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="park-hero">
+  <img src="images/phaetonia-land.jpeg" alt="A themed street inside Phaetonia Land theme park">
+  <div class="park-hero-content" data-reveal>
+    <p class="eyebrow-tag">Service — Ongoing care</p>
+    <h1>A park never stops working. Neither do we.</h1>
+    <p class="sub">Rides, water systems, façades and show elements all age differently — Creativo Milano keeps every part of a park running safely, looking sharp, and ready for its next season.</p>
+  </div>
+</section>
+
+<!-- ================= INTRO ================= -->
+<section class="intro-block" data-reveal>
+  <p>Designing and building a park is only half the story. Once the gates open, daily wear, weather, and constant use start testing every ride, surface and system. Our maintenance service extends the same care from construction into the everyday life of a park — so what we build keeps delivering the experience it was designed for, year after year.</p>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section class="maint-services">
+  <div class="section-head" data-reveal>
+    <h2>What ongoing maintenance covers</h2>
+  </div>
+  <div class="service-grid">
+
+    <div class="service-card" style="--c:var(--blue)" data-reveal>
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
+      <h3>Technical & mechanical maintenance</h3>
+      <p>Scheduled servicing of rides, motors, hydraulics and control systems to keep every attraction operating within spec.</p>
+    </div>
+
+    <div class="service-card" style="--c:var(--red)" data-reveal>
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v6c0 5 3.8 9.4 9 11 5.2-1.6 9-6 9-11V7l-9-5Z"/><path d="m9 12 2 2 4-4"/></svg>
+      <h3>Safety & compliance inspections</h3>
+      <p>Regular structural and safety checks aligned with international standards, with full documentation for operators and authorities.</p>
+    </div>
+
+    <div class="service-card" style="--c:var(--orange)" data-reveal>
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2.1 21 6l-4 4"/><path d="M3 12a9 9 0 0 1 15-6.7L21 6"/><path d="m7 21.9-4-3.9 4-4"/><path d="M21 12a9 9 0 0 1-15 6.7L3 18"/></svg>
+      <h3>Seasonal opening & closing</h3>
+      <p>Pre-season commissioning and end-of-season winterization, so every system is ready the moment doors open again.</p>
+    </div>
+
+    <div class="service-card" style="--c:var(--green)" data-reveal>
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7 3 3-7 7-3-3Z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5Z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+      <h3>Refurbishment & repainting</h3>
+      <p>Refreshing themed surfaces, props and façades so the park keeps the same visual impact it had on opening day.</p>
+    </div>
+
+    <div class="service-card" style="--c:var(--azure)" data-reveal>
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      <h3>Spare parts & technical support</h3>
+      <p>Direct access to original components and technical documentation, minimizing downtime when something needs replacing.</p>
+    </div>
+
+    <div class="service-card" style="--c:var(--blue)" data-reveal>
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <h3>24/7 emergency assistance</h3>
+      <p>A direct line to our technical team for urgent issues, so a park is never left waiting during operating hours.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= PROCESS ================= -->
+<section class="process">
+  <div class="section-head" data-reveal>
+    <p class="eyebrow-tag" style="color:var(--blue);justify-content:center;">How we work</p>
+    <h2>From handover to every season after</h2>
+  </div>
+  <div class="process-grid">
+    <div class="process-step" data-reveal>
+      <div class="num" style="--c:var(--red)">01</div>
+      <h4>Assessment</h4>
+      <p>We map every ride, system and surface to build a tailored maintenance plan.</p>
+    </div>
+    <div class="process-step" data-reveal>
+      <div class="num" style="--c:var(--orange)">02</div>
+      <h4>Scheduled care</h4>
+      <p>Preventive maintenance runs on a calendar built around your operating season.</p>
+    </div>
+    <div class="process-step" data-reveal>
+      <div class="num" style="--c:var(--green)">03</div>
+      <h4>On-call response</h4>
+      <p>Our technical team is reachable for anything unplanned, any day the park is open.</p>
+    </div>
+    <div class="process-step" data-reveal>
+      <div class="num" style="--c:var(--blue)">04</div>
+      <h4>Season review</h4>
+      <p>After each season, we report findings and plan refurbishment ahead of the next one.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PARKS ================= -->
+<section class="cared-parks">
+  <div class="section-head" data-reveal>
+    <p class="eyebrow-tag" style="color:var(--green);justify-content:center;">The kind of parks we care for</p>
+    <h2>Built by us, kept running by us</h2>
+  </div>
+  <div class="project-grid">
+
+    <div class="project-card" data-reveal>
+      <img src="images/phaetonia-land.jpeg" alt="Phaetonia Land themed street with rollercoaster" loading="lazy">
+      <div class="project-label"><div class="name">Phaetonia Land</div><div class="meta">Theme park</div></div>
+    </div>
+
+    <div class="project-card" data-reveal>
+      <img src="images/aqua-park.jpeg" alt="Aerial view of an aqua park resort with pools and slides" loading="lazy">
+      <div class="project-label"><div class="name">Aqua Park Resort</div><div class="meta">Water park</div></div>
+    </div>
+
+    <div class="project-card" data-reveal>
+      <img src="images/kids-town.jpeg" alt="Whimsical carriage and castle attraction at Kids Town" loading="lazy">
+      <div class="project-label"><div class="name">Kids Town</div><div class="meta">Theme park</div></div>
+    </div>
+
+    <div class="project-card" data-reveal>
+      <img src="images/campus-park.jpeg" alt="Aerial view of Campus Park's courts and playgrounds" loading="lazy">
+      <div class="project-label"><div class="name">Campus Park</div><div class="meta">Urban park</div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="park-cta">
+  <div class="park-cta-content" data-reveal>
+    <h2>Already running a park?</h2>
+    <p>Whether we built it or not, our team can assess it and put together a maintenance plan that fits how it operates.</p>
+    <a class="btn-primary" href="creativo-milano-landing.html#contact">Talk to us</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo"><img src="images/logo.png" alt=""><span>Creativo Milano</span></div>
+  <p>Creativo Milano — part of the <a href="https://www.outdoorfactory.com" target="_blank" rel="noopener">Outdoor Factory</a> group</p>
+</footer>
+
+<script>
+  const reveal = document.querySelectorAll('[data-reveal]');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach((entry, idx)=>{
+      if(entry.isIntersecting){
+        entry.target.style.transitionDelay = (idx % 6) * 0.06 + 's';
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:.15});
+  reveal.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
