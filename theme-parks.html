@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Theme Parks — Creativo Milano</title>
+<meta name="description" content="Theme park design and build by Creativo Milano — rides, themed lands and full attraction delivery.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23FCB040'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FAF8F3; --white:#FFFFFF; --ink:#18181A; --ink-soft:#5C5C57; --line:#E5E1D6;
+    --red:#BF1E2E; --orange:#F1592A; --yellow:#FCB040; --green:#8CC63F; --azure:#25AAE1; --blue:#0F75BC;
+    --c-main:var(--orange); --font-display:'Space Grotesk',sans-serif; --font-body:'Inter',sans-serif; --font-mono:'JetBrains Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--font-body);color:var(--ink);background:var(--cream);line-height:1.6;overflow-x:hidden;}
+  a{color:inherit;}
+  section{position:relative;}
+
+  [data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+  [data-reveal].in-view{opacity:1;transform:translateY(0);}
+
+  .nav{position:fixed;top:0;left:0;width:100%;z-index:900;display:flex;align-items:center;justify-content:space-between;
+    padding:20px 6%;background:rgba(250,248,243,.92);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line);}
+  .logo{font-family:var(--font-display);font-weight:700;font-size:1.1rem;letter-spacing:-.02em;text-decoration:none;}
+  .logo span{color:var(--blue);font-weight:500;}
+  .back-link{font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;
+    text-decoration:none;color:var(--ink);opacity:.75;transition:opacity .2s ease;}
+  .back-link:hover{opacity:1;}
+
+  .svc-hero{min-height:78vh;display:flex;align-items:center;padding:7rem 6% 4rem;
+    background:linear-gradient(135deg,var(--c-main) 0%,#a83a15 100%);color:var(--cream);position:relative;overflow:hidden;}
+  .svc-hero::before{content:'';position:absolute;inset:0;opacity:.15;
+    background-image:radial-gradient(circle at 20% 30%,#fff 0,transparent 40%),radial-gradient(circle at 80% 70%,#fff 0,transparent 35%);}
+  .svc-hero-content{position:relative;z-index:2;max-width:760px;}
+  .eyebrow-tag{font-family:var(--font-mono);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--yellow);margin-bottom:1.4rem;display:flex;align-items:center;gap:.6rem;}
+  .eyebrow-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);}
+  .svc-hero h1{font-family:var(--font-display);font-weight:700;font-size:clamp(2.2rem,5.6vw,3.8rem);
+    line-height:1.08;margin-bottom:1.3rem;letter-spacing:-.02em;}
+  .svc-hero .sub{font-size:1.05rem;color:rgba(250,248,243,.88);max-width:540px;}
+
+  .intro-block{padding:5.5rem 6% 2rem;max-width:760px;margin:0 auto;text-align:center;}
+  .intro-block p{font-size:1.1rem;color:var(--ink-soft);line-height:1.7;}
+
+  .svc-services{padding:3rem 6% 5.5rem;}
+  .section-head{max-width:620px;margin:0 auto 3rem;text-align:center;}
+  .section-head h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.8rem,3.6vw,2.6rem);letter-spacing:-.01em;}
+  .service-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem;max-width:1180px;margin:0 auto;}
+  .service-card{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:2rem 1.6rem;
+    position:relative;overflow:hidden;transition:transform .3s ease,box-shadow .3s ease;}
+  .service-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--c);
+    transform:scaleX(0);transform-origin:left;transition:transform .35s ease;}
+  .service-card:hover{transform:translateY(-6px);box-shadow:0 18px 32px -18px rgba(0,0,0,.14);}
+  .service-card:hover::before{transform:scaleX(1);}
+  .service-icon{width:36px;height:36px;color:var(--c);margin-bottom:1.3rem;}
+  .service-card h3{font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:.5rem;}
+  .service-card p{font-size:.9rem;color:var(--ink-soft);}
+
+  .selected-work{padding:5.5rem 6%;background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .work-list{max-width:800px;margin:2.6rem auto 0;display:flex;flex-direction:column;}
+  .work-row{display:flex;align-items:center;justify-content:space-between;padding:1.4rem 0;border-bottom:1px solid var(--line);
+    transition:padding-left .25s ease;}
+  .work-row:hover{padding-left:.6rem;}
+  .work-row:first-child{border-top:1px solid var(--line);}
+  .work-name{display:flex;align-items:center;gap:.9rem;font-family:var(--font-display);font-weight:600;font-size:1.05rem;}
+  .work-name .dot{width:9px;height:9px;border-radius:50%;background:var(--c-main);flex-shrink:0;}
+  .work-meta{font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);}
+  .work-note{margin-top:1.6rem;font-size:.82rem;color:var(--ink-soft);font-style:italic;text-align:center;}
+
+  .svc-cta{padding:6.5rem 6%;text-align:center;background:var(--ink);color:var(--cream);overflow:hidden;position:relative;}
+  .svc-cta::before{content:'';position:absolute;inset:-30%;
+    background:conic-gradient(from 0deg,var(--red),var(--orange),var(--yellow),var(--green),var(--azure),var(--blue),var(--red));
+    opacity:.14;filter:blur(70px);animation:spin 32s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .svc-cta-content{position:relative;z-index:2;max-width:600px;margin:0 auto;}
+  .svc-cta h2{font-family:var(--font-display);font-weight:700;font-size:clamp(1.9rem,4.4vw,2.8rem);margin-bottom:1.1rem;}
+  .svc-cta p{font-size:1rem;opacity:.8;margin-bottom:2.2rem;}
+  .btn-primary{font-family:var(--font-mono);font-size:.82rem;text-transform:uppercase;letter-spacing:.04em;
+    background:var(--yellow);color:var(--ink);padding:1rem 1.8rem;border-radius:40px;text-decoration:none;
+    display:inline-block;transition:transform .25s ease,box-shadow .25s ease;}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 24px -12px rgba(0,0,0,.25);}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.6);padding:2.6rem 6% 2.2rem;text-align:center;
+    font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;}
+  footer a{text-decoration:underline;color:rgba(255,255,255,.8);}
+  .footer-logo{display:flex;align-items:center;justify-content:center;gap:.7rem;margin-bottom:1.2rem;}
+  .footer-logo img{height:44px;width:auto;}
+  .footer-logo span{font-family:var(--font-display);color:#fff;font-weight:700;font-size:1.4rem;
+    text-transform:none;letter-spacing:0;}
+
+  @media (prefers-reduced-motion:reduce){
+    [data-reveal]{opacity:1!important;transform:none!important;transition:none!important;}
+    .svc-cta::before{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="logo" href="creativo-milano-landing.html">Creativo<span>Milano</span></a>
+  <a class="back-link" href="creativo-milano-landing.html#services">← Back to services</a>
+</header>
+
+<section class="svc-hero">
+  <div class="svc-hero-content" data-reveal>
+    <p class="eyebrow-tag">Service — Theme Parks</p>
+    <h1>Parks built for the moment before the scream.</h1>
+    <p class="sub">From themed lands to individual attractions, we design and build the full experience — rides, scenery, wayfinding and food & beverage areas working together as one world.</p>
+  </div>
+</section>
+
+<section class="intro-block" data-reveal>
+  <p>A great ride is only part of a great park. We plan the full guest journey — arrival, queuing, the ride itself, and everything around it — so every themed land feels like a complete place, not a collection of attractions. Our team handles concept, technical drawing, fabrication and on-site construction under one roof.</p>
+</section>
+
+<section class="svc-services">
+  <div class="section-head" data-reveal>
+    <h2>What we design and build</h2>
+  </div>
+  <div class="service-grid">
+
+    <div class="service-card" style="--c:var(--orange)" data-reveal>
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="7"/><path d="M12 4v14M5 11h14M7.5 5.5l9 11M16.5 5.5l-9 11"/><path d="M9 21h6"/></svg>
+      <h3>Themed lands & masterplanning</h3>
+      <p>Full-site concept and masterplan design, from guest flow to zone-by-zone theming.</p>
+    </div>
+
+    <div class="service-card" style="--c:var(--red)" data-reveal>
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+      <h3>Ride integration</h3>
+      <p>Coordinating ride manufacturers with the themed environment built around each attraction.</p>
+    </div>
+
+    <div class="service-card" style="--c:var(--green)" data-reveal>
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+      <h3>Scenic fabrication</h3>
+      <p>Rockwork, façades, props and themed structures produced to withstand daily public use.</p>
+    </div>
+
+    <div class="service-card" style="--c:var(--azure)" data-reveal>
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4c0 8-6 14-14 14H4c0-8 6-14 14-14h2z"/><path d="M9 15 19 5"/></svg>
+      <h3>Water & aqua park systems</h3>
+      <p>Slides, pools and water play structures engineered alongside filtration and safety systems.</p>
+    </div>
+
+    <div class="service-card" style="--c:var(--blue)" data-reveal>
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      <h3>Kids & family zones</h3>
+      <p>Scaled-down attractions and interactive play designed specifically for younger guests.</p>
+    </div>
+
+    <div class="service-card" style="--c:var(--orange)" data-reveal>
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      <h3>Turnkey construction</h3>
+      <p>Full build delivery on site, from groundbreaking to opening day, under one project team.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="selected-work">
+  <div class="section-head" data-reveal>
+    <p class="eyebrow-tag" style="color:var(--orange);justify-content:center;">Selected work</p>
+    <h2>Parks we've helped bring to life</h2>
+  </div>
+  <div class="work-list" data-reveal>
+    <div class="work-row">
+      <div class="work-name"><span class="dot"></span>Phaetonia Land</div>
+      <div class="work-meta">Theme park</div>
+    </div>
+    <div class="work-row">
+      <div class="work-name"><span class="dot"></span>Kids Town</div>
+      <div class="work-meta">Family theme park</div>
+    </div>
+    <div class="work-row">
+      <div class="work-name"><span class="dot"></span>Aqua Park Resort</div>
+      <div class="work-meta">Water park</div>
+    </div>
+  </div>
+  <p class="work-note">Photography for these projects is being finalized — check back soon, or ask us directly for the full portfolio.</p>
+</section>
+
+<section class="svc-cta">
+  <div class="svc-cta-content" data-reveal>
+    <h2>Planning a new park or attraction?</h2>
+    <p>Whether it's a single ride or a full masterplan, our team can take it from first sketch to opening day.</p>
+    <a class="btn-primary" href="creativo-milano-landing.html#contact">Start a project</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo"><img src="images/logo.png" alt=""><span>Creativo Milano</span></div>
+  <p>Creativo Milano — part of the <a href="https://www.outdoorfactory.com" target="_blank" rel="noopener">Outdoor Factory</a> group</p>
+</footer>
+
+<script>
+  const reveal = document.querySelectorAll('[data-reveal]');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach((entry, idx)=>{
+      if(entry.isIntersecting){
+        entry.target.style.transitionDelay = (idx % 6) * 0.06 + 's';
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:.15});
+  reveal.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
