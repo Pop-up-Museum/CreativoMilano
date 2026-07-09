@@ -74,7 +74,7 @@
   .btn-text:hover{opacity:.6;}
 
   .hero-photo{position:relative;height:420px;border-radius:20px;overflow:hidden;}
-  .hero-photo img{width:100%;height:100%;object-fit:cover;}
+  .hero-photo img,.hero-photo video{width:100%;height:100%;object-fit:cover;}
   .hero-photo::after{content:'';position:absolute;inset:0;
     background:linear-gradient(165deg,rgba(15,117,188,.22),rgba(191,30,46,0) 60%);}
   .hero-photo-tag{position:absolute;left:16px;bottom:16px;background:rgba(250,248,243,.92);backdrop-filter:blur(6px);
@@ -224,9 +224,11 @@
         </div>
       </div>
 
-      <!-- Real hero photography: a still from one of Creativo's digital experience museums. -->
+      <!-- Hero video: silent looping background clip, poster shown until the video is ready. -->
       <div class="hero-photo">
-        <img src="images/hero-bg.jpeg" alt="Visitors inside one of Creativo's immersive digital experience museums">
+        <video autoplay muted loop playsinline poster="images/hero-scene-poster.jpg">
+          <source src="images/hero-scene.mp4" type="video/mp4">
+        </video>
         <span class="hero-photo-tag">Digital Experience Museum</span>
       </div>
     </div>
