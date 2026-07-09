@@ -46,9 +46,9 @@
   .download-btn:hover{transform:translateY(-2px);}
   .download-btn svg{width:16px;height:16px;}
 
-  /* ---------- flipbook ---------- */
+  /* ---------- flipbook (open-book spread, static black left page) ---------- */
   .flipbook-section{padding:2rem 6% 3rem;display:flex;flex-direction:column;align-items:center;}
-  .flipbook-stage{display:flex;align-items:center;gap:clamp(8px,2vw,28px);width:100%;max-width:900px;justify-content:center;}
+  .flipbook-stage{display:flex;align-items:center;gap:clamp(24px,5vw,64px);width:100%;max-width:1000px;justify-content:center;}
   .flip-arrow{flex-shrink:0;width:56px;height:56px;border-radius:50%;border:1px solid var(--line);background:var(--white);
     color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;
     box-shadow:0 6px 16px -6px rgba(0,0,0,.15);transition:background .2s ease,transform .15s ease,opacity .2s ease,box-shadow .2s ease;}
@@ -61,19 +61,18 @@
   .flip-arrow-label{font-family:var(--font-mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.04em;
     color:var(--ink-soft);}
 
-  .flipbook{position:relative;width:min(72vw,340px);aspect-ratio:1000/1413;perspective:2600px;
-    filter:drop-shadow(0 30px 50px rgba(0,0,0,.18));}
-  .flip-page{position:absolute;inset:0;transform-origin:left center;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;
-    transition:transform .65s cubic-bezier(.45,0,.2,1);border-radius:4px;overflow:hidden;
-    box-shadow:1px 0 0 rgba(0,0,0,.06);}
-  .flip-page img{width:100%;height:100%;object-fit:cover;display:block;-webkit-user-drag:none;user-select:none;
-    -webkit-backface-visibility:hidden;backface-visibility:hidden;position:relative;}
-  .flip-page::before{content:'';position:absolute;inset:0;background:#0a0a0a;
-    -webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform:rotateY(180deg);transform:rotateY(180deg);}
-  .flip-page.flipped{-webkit-transform:rotateY(-170deg);transform:rotateY(-170deg);}
-  .flip-page::after{content:'';position:absolute;inset:0;pointer-events:none;
-    -webkit-backface-visibility:hidden;backface-visibility:hidden;
-    background:linear-gradient(90deg,rgba(0,0,0,.16) 0%,transparent 12%,transparent 88%,rgba(0,0,0,.08) 100%);}
+  .book{position:relative;display:flex;width:min(80vw,620px);aspect-ratio:2000/1413;margin:0 auto;
+    border-radius:6px;overflow:hidden;filter:drop-shadow(0 30px 55px rgba(0,0,0,.2));background:#0a0a0a;}
+  .book-left{flex:1;position:relative;background:#0a0a0a;}
+  .book-left::after{content:'';position:absolute;top:0;right:0;bottom:0;width:10%;
+    background:linear-gradient(90deg,transparent,rgba(0,0,0,.4));}
+  .book-left-mark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.14;}
+  .book-left-mark img{width:34%;filter:brightness(0) invert(1);}
+  .book-right{flex:1;position:relative;overflow:hidden;background:#fff;perspective:1600px;}
+  .book-right::after{content:'';position:absolute;top:0;left:0;bottom:0;width:8%;pointer-events:none;
+    background:linear-gradient(90deg,rgba(0,0,0,.12),transparent);z-index:2;}
+  .book-right img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+    -webkit-user-drag:none;user-select:none;transform-origin:left center;transition:transform .3s ease;}
 
   .flipbook-meta{display:flex;flex-direction:column;align-items:center;gap:.9rem;margin-top:1.8rem;}
   .page-counter{font-family:var(--font-mono);font-size:.76rem;color:var(--ink-soft);letter-spacing:.04em;}
@@ -92,7 +91,7 @@
   .thumb.active{opacity:1;border-color:var(--blue);}
 
   :fullscreen .flipbook-section{background:var(--cream);padding-top:4vh;justify-content:center;min-height:100vh;}
-  :fullscreen .flipbook{width:min(60vh,60vw);}
+  :fullscreen .book{width:min(70vh,80vw);}
 
   footer{background:var(--ink);color:rgba(255,255,255,.6);padding:2.6rem 6% 2.2rem;text-align:center;
     font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;margin-top:3rem;}
@@ -103,14 +102,15 @@
     text-transform:none;letter-spacing:0;}
 
   @media (max-width:600px){
-    .flipbook-stage{gap:6px;}
-    .flip-arrow{width:38px;height:38px;}
-    .flipbook{width:min(62vw,280px);}
+    .flipbook-stage{gap:10px;}
+    .flip-arrow{width:40px;height:40px;}
+    .flip-arrow svg{width:18px;height:18px;}
+    .book{width:min(78vw,340px);}
   }
 
   @media (prefers-reduced-motion:reduce){
     [data-reveal]{opacity:1!important;transform:none!important;transition:none!important;}
-    .flip-page{transition:none!important;}
+    .book-right img{transition:none!important;}
   }
 </style>
 </head>
@@ -140,17 +140,13 @@
       <span class="flip-arrow-label">Back</span>
     </div>
 
-    <div class="flipbook" id="flipbook">
-      <!-- Pages stacked in order; JS controls the flip animation and z-index -->
-      <div class="flip-page" data-index="0"><img src="images/profile/profile-p01.jpg" alt="Company profile page 1"></div>
-      <div class="flip-page" data-index="1"><img src="images/profile/profile-p02.jpg" alt="Company profile page 2"></div>
-      <div class="flip-page" data-index="2"><img src="images/profile/profile-p03.jpg" alt="Company profile page 3"></div>
-      <div class="flip-page" data-index="3"><img src="images/profile/profile-p04.jpg" alt="Company profile page 4"></div>
-      <div class="flip-page" data-index="4"><img src="images/profile/profile-p05.jpg" alt="Company profile page 5"></div>
-      <div class="flip-page" data-index="5"><img src="images/profile/profile-p06.jpg" alt="Company profile page 6"></div>
-      <div class="flip-page" data-index="6"><img src="images/profile/profile-p07.jpg" alt="Company profile page 7"></div>
-      <div class="flip-page" data-index="7"><img src="images/profile/profile-p08.jpg" alt="Company profile page 8"></div>
-      <div class="flip-page" data-index="8"><img src="images/profile/profile-p09.jpg" alt="Company profile page 9"></div>
+    <div class="book" id="book">
+      <div class="book-left">
+        <div class="book-left-mark"><img src="images/logo.png" alt=""></div>
+      </div>
+      <div class="book-right">
+        <img id="pageFace" src="images/profile/profile-p01.jpg" alt="Company profile page 1">
+      </div>
     </div>
 
     <div class="flip-arrow-wrap">
@@ -186,78 +182,74 @@
   });
 
   // ---------- 3D page-flip viewer ----------
-  const pages = Array.from(document.querySelectorAll('.flip-page'));
-  const total = pages.length;
+  const TOTAL_PAGES = 9;
   let currentIndex = 0;
+  let isAnimating = false;
 
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
   const counterEl = document.getElementById('pageCounter');
   const thumbStrip = document.getElementById('thumbStrip');
-  const flipbookEl = document.getElementById('flipbook');
+  const bookEl = document.getElementById('book');
+  const pageFace = document.getElementById('pageFace');
   const fullscreenBtn = document.getElementById('fullscreenBtn');
 
-  function restingZ(i, flipped) { return flipped ? i : (total - i); }
-
-  // initial stacking: page 0 on top, all unflipped
-  pages.forEach((p, i) => { p.style.zIndex = restingZ(i, false); });
+  function pageSrc(i) { return `images/profile/profile-p${String(i + 1).padStart(2, '0')}.jpg`; }
 
   // build thumbnail strip
-  pages.forEach((p, i) => {
+  for (let i = 0; i < TOTAL_PAGES; i++) {
     const thumb = document.createElement('div');
     thumb.className = 'thumb' + (i === 0 ? ' active' : '');
-    thumb.innerHTML = `<img src="${p.querySelector('img').src}" alt="Page ${i + 1} thumbnail">`;
+    thumb.innerHTML = `<img src="${pageSrc(i)}" alt="Page ${i + 1} thumbnail">`;
     thumb.addEventListener('click', () => jumpTo(i));
     thumbStrip.appendChild(thumb);
-  });
+  }
   const thumbs = Array.from(thumbStrip.children);
 
   function updateUI() {
-    counterEl.textContent = `Page ${currentIndex + 1} / ${total}`;
+    counterEl.textContent = `Page ${currentIndex + 1} / ${TOTAL_PAGES}`;
     prevBtn.disabled = currentIndex === 0;
-    nextBtn.disabled = currentIndex === total - 1;
+    nextBtn.disabled = currentIndex === TOTAL_PAGES - 1;
     thumbs.forEach((t, i) => t.classList.toggle('active', i === currentIndex));
   }
 
-  function goNext() {
-    if (currentIndex >= total - 1) return;
-    const p = pages[currentIndex];
-    p.style.zIndex = 999;
-    requestAnimationFrame(() => p.classList.add('flipped'));
-    currentIndex++;
-    updateUI();
-  }
-
-  function goPrev() {
-    if (currentIndex <= 0) return;
-    currentIndex--;
-    const p = pages[currentIndex];
-    p.style.zIndex = 999;
-    requestAnimationFrame(() => p.classList.remove('flipped'));
-    updateUI();
+  // Flips the visible page: rotates edge-on (90deg, effectively invisible), swaps the
+  // image underneath at that exact moment, then rotates back — never shows a mirrored
+  // or backwards image because the source only ever changes while edge-on.
+  function flipTo(target) {
+    if (isAnimating || target < 0 || target >= TOTAL_PAGES || target === currentIndex) return;
+    isAnimating = true;
+    pageFace.style.transition = 'transform .3s ease';
+    pageFace.style.transform = 'rotateY(-90deg)';
+    setTimeout(() => {
+      pageFace.src = pageSrc(target);
+      pageFace.alt = `Company profile page ${target + 1}`;
+      pageFace.style.transition = 'none';
+      pageFace.style.transform = 'rotateY(90deg)';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          pageFace.style.transition = 'transform .3s ease';
+          pageFace.style.transform = 'rotateY(0deg)';
+        });
+      });
+      currentIndex = target;
+      updateUI();
+      setTimeout(() => { isAnimating = false; }, 320);
+    }, 300);
   }
 
   function jumpTo(target) {
     if (target === currentIndex) return;
-    pages.forEach((p, i) => {
-      p.style.transition = 'none';
-      const flipped = i < target;
-      p.classList.toggle('flipped', flipped);
-      p.style.zIndex = restingZ(i, flipped);
-    });
-    requestAnimationFrame(() => {
-      pages.forEach(p => { p.style.transition = ''; });
-    });
+    pageFace.style.transition = 'none';
+    pageFace.style.transform = 'rotateY(0deg)';
+    pageFace.src = pageSrc(target);
+    pageFace.alt = `Company profile page ${target + 1}`;
     currentIndex = target;
     updateUI();
   }
 
-  pages.forEach((p, i) => {
-    p.addEventListener('transitionend', () => {
-      const flipped = p.classList.contains('flipped');
-      p.style.zIndex = restingZ(i, flipped);
-    });
-  });
+  function goNext() { flipTo(currentIndex + 1); }
+  function goPrev() { flipTo(currentIndex - 1); }
 
   prevBtn.addEventListener('click', goPrev);
   nextBtn.addEventListener('click', goNext);
@@ -268,8 +260,8 @@
 
   // touch swipe support
   let touchStartX = null;
-  flipbookEl.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  flipbookEl.addEventListener('touchend', (e) => {
+  bookEl.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  bookEl.addEventListener('touchend', (e) => {
     if (touchStartX === null) return;
     const dx = e.changedTouches[0].clientX - touchStartX;
     if (Math.abs(dx) > 40) { dx < 0 ? goNext() : goPrev(); }
