@@ -76,7 +76,7 @@
   .book-right{flex:1 1 auto;position:relative;overflow:hidden;background:#fff;perspective:1600px;}
   .flip-unit{position:absolute;inset:0;transform-origin:left center;
     -webkit-transform-style:preserve-3d;transform-style:preserve-3d;
-    transition:transform .5s cubic-bezier(.45,0,.2,1);}
+    transition:transform .65s cubic-bezier(.45,0,.2,1);}
   .flip-unit img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
     -webkit-user-drag:none;user-select:none;-webkit-backface-visibility:hidden;backface-visibility:hidden;}
   .flip-unit::before{content:'';position:absolute;inset:0;background:#0a0a0a;
@@ -214,6 +214,13 @@
   function rightPageNum(view) { return view === 0 ? 1 : (2 * view + 1); } // 1, 3, 5, 7, 9
   function leftPageNum(view) { return 2 * view; } // 0 (unused), 2, 4, 6, 8
 
+  // Preload every page image up front so flips never stall waiting for a fresh download —
+  // this is what makes the motion feel instant and smooth rather than stuttering mid-flip.
+  for (let n = 1; n <= TOTAL_PAGES; n++) {
+    const preload = new Image();
+    preload.src = pageSrc(n);
+  }
+
   // build thumbnail strip — one per view (cover + 4 spreads)
   for (let v = 0; v < TOTAL_VIEWS; v++) {
     const thumb = document.createElement('div');
@@ -240,9 +247,10 @@
   function goTo(target, direction) {
     if (isAnimating || target < 0 || target >= TOTAL_VIEWS || target === currentIndex) return;
     isAnimating = true;
-    flipUnit.classList.add(direction === 'next' ? 'flip-next' : 'flip-prev');
+    const flipClass = direction === 'next' ? 'flip-next' : 'flip-prev';
 
-    setTimeout(() => {
+    function onFlipped() {
+      flipUnit.removeEventListener('transitionend', onFlipped);
       pageFace.src = pageSrc(rightPageNum(target));
       pageFace.alt = `Company profile page ${rightPageNum(target)}`;
       if (target > 0) {
@@ -252,12 +260,16 @@
       flipUnit.style.transition = 'none';
       flipUnit.classList.remove('flip-next', 'flip-prev');
       requestAnimationFrame(() => {
-        requestAnimationFrame(() => { flipUnit.style.transition = ''; });
+        requestAnimationFrame(() => {
+          flipUnit.style.transition = '';
+          isAnimating = false;
+        });
       });
       currentIndex = target;
       updateUI();
-      setTimeout(() => { isAnimating = false; }, 60);
-    }, 500);
+    }
+    flipUnit.addEventListener('transitionend', onFlipped);
+    flipUnit.classList.add(flipClass);
   }
 
   function jumpTo(target) {
