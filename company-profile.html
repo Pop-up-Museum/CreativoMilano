@@ -56,21 +56,23 @@
   .flip-arrow:active{transform:scale(.94);}
   .flip-arrow:disabled{opacity:.25;cursor:default;pointer-events:none;box-shadow:none;}
   .flip-arrow svg{width:24px;height:24px;}
-  .flip-arrow-wrap{display:flex;flex-direction:column;align-items:center;gap:.5rem;flex-shrink:0;}
+  .flip-arrow-wrap{display:flex;flex-direction:column;align-items:center;gap:.5rem;flex-shrink:0;
+    position:relative;z-index:1000;}
   .flip-arrow-label{font-family:var(--font-mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.04em;
     color:var(--ink-soft);}
 
   .flipbook{position:relative;width:min(72vw,340px);aspect-ratio:1000/1413;perspective:2600px;
     filter:drop-shadow(0 30px 50px rgba(0,0,0,.18));}
-  .flip-page{position:absolute;inset:0;transform-origin:left center;transform-style:preserve-3d;
+  .flip-page{position:absolute;inset:0;transform-origin:left center;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;
     transition:transform .65s cubic-bezier(.45,0,.2,1);border-radius:4px;overflow:hidden;
     box-shadow:1px 0 0 rgba(0,0,0,.06);}
   .flip-page img{width:100%;height:100%;object-fit:cover;display:block;-webkit-user-drag:none;user-select:none;
-    backface-visibility:hidden;position:relative;}
+    -webkit-backface-visibility:hidden;backface-visibility:hidden;position:relative;}
   .flip-page::before{content:'';position:absolute;inset:0;background:#0a0a0a;
-    backface-visibility:hidden;transform:rotateY(180deg);}
-  .flip-page.flipped{transform:rotateY(-170deg);}
-  .flip-page::after{content:'';position:absolute;inset:0;pointer-events:none;backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform:rotateY(180deg);transform:rotateY(180deg);}
+  .flip-page.flipped{-webkit-transform:rotateY(-170deg);transform:rotateY(-170deg);}
+  .flip-page::after{content:'';position:absolute;inset:0;pointer-events:none;
+    -webkit-backface-visibility:hidden;backface-visibility:hidden;
     background:linear-gradient(90deg,rgba(0,0,0,.16) 0%,transparent 12%,transparent 88%,rgba(0,0,0,.08) 100%);}
 
   .flipbook-meta{display:flex;flex-direction:column;align-items:center;gap:.9rem;margin-top:1.8rem;}
