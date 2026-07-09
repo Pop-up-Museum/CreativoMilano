@@ -94,8 +94,8 @@
   .video-section h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.7rem,3.2vw,2.4rem);
     margin-bottom:2.2rem;color:var(--ink);}
   .video-wrap{max-width:960px;margin:0 auto;border-radius:16px;overflow:hidden;position:relative;
-    box-shadow:0 24px 60px -20px rgba(0,0,0,.25);}
-  .video-wrap video{width:100%;display:block;}
+    aspect-ratio:16/9;box-shadow:0 24px 60px -20px rgba(0,0,0,.25);}
+  .video-wrap iframe,.video-wrap #danteYouTubePlayer{position:absolute;inset:0;width:100%;height:100%;}
   .video-mute-btn{position:absolute;bottom:16px;right:16px;width:40px;height:40px;border-radius:50%;
     background:rgba(24,24,26,.65);backdrop-filter:blur(6px);border:none;color:#fff;cursor:pointer;
     display:flex;align-items:center;justify-content:center;transition:transform .15s ease,background .2s ease;}
@@ -276,13 +276,11 @@
   <h2>The experience, in motion.</h2>
 
   <div class="video-wrap" id="danteVideoWrap">
-    <video id="danteVideo" loop playsinline muted poster="images/hero-vr.jpg">
-      <source src="YTDown_YouTube_Inferno-Esperienza-Immersiva-nella-Divin_Media_bvhgjoAPsgY_001_1080p.mp4" type="video/mp4">
-    </video>
+    <div id="danteYouTubePlayer"></div>
     <button class="video-mute-btn" id="danteMuteBtn" type="button" aria-label="Unmute video"></button>
   </div>
 
-  <p class="video-caption">Plays automatically as you scroll — sound turns on only while the video is on screen</p>
+  <p class="video-caption">Sound turns on automatically while the video is on screen</p>
 </section>
 
 <!-- ================= GALLERY ================= -->
@@ -347,28 +345,29 @@
   }, {threshold:.15});
   reveal.forEach(el=>io.observe(el));
 
-  // ---- Dante preview video: plays only while on screen, sound only while visible ----
-  const danteVideo = document.getElementById('danteVideo');
+  // ---- Dante preview video (YouTube embed): plays only while on screen, sound only while visible ----
   const danteMuteBtn = document.getElementById('danteMuteBtn');
+  const DANTE_VIDEO_ID = '9nslA76d2uQ';
 
-  if (danteVideo && danteMuteBtn) {
+  if (danteMuteBtn && document.getElementById('danteYouTubePlayer')) {
     const ICON_MUTED = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 5V4L8 9H4Z"/><path d="M16 9l5 5M21 9l-5 5"/></svg>';
     const ICON_ON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 5V4L8 9H4Z"/><path d="M16 8a5 5 0 0 1 0 8"/><path d="M19 5a9 9 0 0 1 0 14"/></svg>';
 
+    let ytPlayer = null;
     let userInteracted = false;
     let isVisible = false;
 
     function refreshMuteIcon() {
-      danteMuteBtn.innerHTML = danteVideo.muted ? ICON_MUTED : ICON_ON;
-      danteMuteBtn.setAttribute('aria-label', danteVideo.muted ? 'Unmute video' : 'Mute video');
+      const muted = ytPlayer ? ytPlayer.isMuted() : true;
+      danteMuteBtn.innerHTML = muted ? ICON_MUTED : ICON_ON;
+      danteMuteBtn.setAttribute('aria-label', muted ? 'Unmute video' : 'Mute video');
     }
     refreshMuteIcon();
 
-    // Any real click/tap/keydown on the page counts as the interaction browsers require before allowing sound.
     function unlockAudio() {
       userInteracted = true;
-      if (isVisible) {
-        danteVideo.muted = false;
+      if (isVisible && ytPlayer) {
+        ytPlayer.unMute();
         refreshMuteIcon();
       }
     }
@@ -376,31 +375,50 @@
       document.addEventListener(evt, unlockAudio, { once: true, passive: true });
     });
 
-    // Manual override: visitor can mute/unmute directly regardless of scroll position.
     danteMuteBtn.addEventListener('click', () => {
       userInteracted = true;
-      danteVideo.muted = !danteVideo.muted;
+      if (!ytPlayer) return;
+      if (ytPlayer.isMuted()) ytPlayer.unMute(); else ytPlayer.mute();
       refreshMuteIcon();
     });
 
     const videoObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         isVisible = entry.isIntersecting;
+        if (!ytPlayer) return;
         if (entry.isIntersecting) {
-          danteVideo.play().catch(() => {});
+          ytPlayer.playVideo();
           if (userInteracted) {
-            danteVideo.muted = false;
+            ytPlayer.unMute();
             refreshMuteIcon();
           }
         } else {
-          danteVideo.muted = true;
-          danteVideo.pause();
+          ytPlayer.mute();
+          ytPlayer.pauseVideo();
           refreshMuteIcon();
         }
       });
     }, { threshold: 0.6 });
 
-    videoObserver.observe(document.getElementById('danteVideoWrap'));
+    // Load the YouTube IFrame API and create the player once it's ready.
+    window.onYouTubeIframeAPIReady = function () {
+      ytPlayer = new YT.Player('danteYouTubePlayer', {
+        videoId: DANTE_VIDEO_ID,
+        playerVars: {
+          autoplay: 0, mute: 1, controls: 1, rel: 0, modestbranding: 1,
+          playsinline: 1, loop: 1, playlist: DANTE_VIDEO_ID
+        },
+        events: {
+          onReady: function () {
+            refreshMuteIcon();
+            videoObserver.observe(document.getElementById('danteVideoWrap'));
+          }
+        }
+      });
+    };
+    const ytScript = document.createElement('script');
+    ytScript.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(ytScript);
   }
 
   // ---------- lightbox: click any gallery photo to view it larger, arrows/keys to browse ----------
