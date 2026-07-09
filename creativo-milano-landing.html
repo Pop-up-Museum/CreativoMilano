@@ -104,7 +104,7 @@
   .project-card{border-radius:16px;overflow:hidden;aspect-ratio:4/3;position:relative;background:var(--ink);}
   .project-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
   .project-card:hover img{transform:scale(1.06);}
-  .project-card::after{content:'';position:absolute;inset:0;
+  .project-card::after{content:'';position:absolute;inset:0;pointer-events:none;
     background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.65) 100%);}
   .project-label{position:absolute;left:0;right:0;bottom:0;padding:1rem 1.1rem;z-index:2;}
   .project-label .name{font-family:var(--font-display);font-weight:600;font-size:.95rem;color:#fff;}
@@ -344,6 +344,9 @@
         <div class="number-label">Group network</div>
       </div>
     </div>
+    <p style="text-align:center;margin-top:2.4rem;font-family:var(--font-mono);font-size:.8rem;">
+      <a href="company-profile.html" style="text-decoration:underline;color:var(--blue);">View our full company profile →</a>
+    </p>
   </section>
 
   <!-- ================= CTA ================= -->
@@ -370,6 +373,7 @@
         <a href="#services">Studio</a>
         <a href="#work">Work</a>
         <a href="#numbers">About</a>
+        <a href="company-profile.html">Company Profile</a>
         <a href="#contact">Contact</a>
       </div>
     </div>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Company Profile — Creativo Milano</title>
+<meta name="description" content="Creativo Milano company profile — vision, services and completed projects.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23FCB040'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FAF8F3; --white:#FFFFFF; --ink:#18181A; --ink-soft:#5C5C57; --line:#E5E1D6;
+    --red:#BF1E2E; --orange:#F1592A; --yellow:#FCB040; --green:#8CC63F; --azure:#25AAE1; --blue:#0F75BC;
+    --font-display:'Space Grotesk',sans-serif; --font-body:'Inter',sans-serif; --font-mono:'JetBrains Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--font-body);color:var(--ink);background:var(--cream);line-height:1.6;overflow-x:hidden;}
+  a{color:inherit;}
+  section{position:relative;}
+
+  [data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+  [data-reveal].in-view{opacity:1;transform:translateY(0);}
+
+  .nav{position:fixed;top:0;left:0;width:100%;z-index:900;display:flex;align-items:center;justify-content:space-between;
+    padding:20px 6%;background:rgba(250,248,243,.92);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line);}
+  .logo{font-family:var(--font-display);font-weight:700;font-size:1.1rem;letter-spacing:-.02em;text-decoration:none;}
+  .logo span{color:var(--blue);font-weight:500;}
+  .back-link{font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;
+    text-decoration:none;color:var(--ink);opacity:.75;transition:opacity .2s ease;}
+  .back-link:hover{opacity:1;}
+
+  /* ---------- intro ---------- */
+  .profile-intro{padding:7.5rem 6% 2.5rem;max-width:700px;margin:0 auto;text-align:center;}
+  .eyebrow-tag{font-family:var(--font-mono);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--blue);margin-bottom:1.2rem;display:flex;align-items:center;justify-content:center;gap:.6rem;}
+  .eyebrow-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange);}
+  .profile-intro h1{font-family:var(--font-display);font-weight:700;font-size:clamp(1.9rem,4.6vw,3rem);
+    letter-spacing:-.02em;margin-bottom:1rem;}
+  .profile-intro p{color:var(--ink-soft);font-size:1.02rem;}
+  .download-btn{margin-top:1.6rem;display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-mono);
+    font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;background:var(--ink);color:var(--cream);
+    padding:.85rem 1.5rem;border-radius:40px;text-decoration:none;transition:transform .2s ease;}
+  .download-btn:hover{transform:translateY(-2px);}
+  .download-btn svg{width:16px;height:16px;}
+
+  /* ---------- flipbook ---------- */
+  .flipbook-section{padding:2rem 6% 3rem;display:flex;flex-direction:column;align-items:center;}
+  .flipbook-stage{display:flex;align-items:center;gap:clamp(8px,2vw,28px);width:100%;max-width:900px;justify-content:center;}
+  .flip-arrow{flex-shrink:0;width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:var(--white);
+    color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s ease,transform .15s ease,opacity .2s ease;}
+  .flip-arrow:hover{background:var(--ink);color:var(--cream);}
+  .flip-arrow:active{transform:scale(.94);}
+  .flip-arrow:disabled{opacity:.25;cursor:default;pointer-events:none;}
+  .flip-arrow svg{width:20px;height:20px;}
+
+  .flipbook{position:relative;width:min(72vw,340px);aspect-ratio:1000/1413;perspective:2600px;
+    filter:drop-shadow(0 30px 50px rgba(0,0,0,.18));}
+  .flip-page{position:absolute;inset:0;transform-origin:left center;transform-style:preserve-3d;
+    transition:transform .65s cubic-bezier(.45,0,.2,1);border-radius:4px;overflow:hidden;background:#fff;
+    box-shadow:1px 0 0 rgba(0,0,0,.06);}
+  .flip-page img{width:100%;height:100%;object-fit:cover;display:block;-webkit-user-drag:none;user-select:none;}
+  .flip-page.flipped{transform:rotateY(-170deg);}
+  .flip-page::after{content:'';position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(90deg,rgba(0,0,0,.16) 0%,transparent 12%,transparent 88%,rgba(0,0,0,.08) 100%);}
+
+  .flipbook-meta{display:flex;flex-direction:column;align-items:center;gap:.9rem;margin-top:1.8rem;}
+  .page-counter{font-family:var(--font-mono);font-size:.76rem;color:var(--ink-soft);letter-spacing:.04em;}
+  .fullscreen-btn{display:flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:.7rem;
+    text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);background:none;border:none;cursor:pointer;
+    transition:color .2s ease;}
+  .fullscreen-btn:hover{color:var(--ink);}
+  .fullscreen-btn svg{width:14px;height:14px;}
+
+  .thumb-strip{display:flex;gap:.5rem;overflow-x:auto;max-width:100%;padding:.5rem .2rem 1rem;margin-top:.4rem;}
+  .thumb-strip::-webkit-scrollbar{height:5px;}
+  .thumb-strip::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px;}
+  .thumb{flex-shrink:0;width:44px;aspect-ratio:1000/1413;border-radius:4px;overflow:hidden;cursor:pointer;
+    border:2px solid transparent;opacity:.55;transition:opacity .2s ease,border-color .2s ease;}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+  .thumb.active{opacity:1;border-color:var(--blue);}
+
+  :fullscreen .flipbook-section{background:var(--cream);padding-top:4vh;justify-content:center;min-height:100vh;}
+  :fullscreen .flipbook{width:min(60vh,60vw);}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.6);padding:2.6rem 6% 2.2rem;text-align:center;
+    font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;margin-top:3rem;}
+  footer a{text-decoration:underline;color:rgba(255,255,255,.8);}
+  .footer-logo{display:flex;align-items:center;justify-content:center;gap:.7rem;margin-bottom:1.2rem;}
+  .footer-logo img{height:44px;width:auto;}
+  .footer-logo span{font-family:var(--font-display);color:#fff;font-weight:700;font-size:1.4rem;
+    text-transform:none;letter-spacing:0;}
+
+  @media (max-width:600px){
+    .flipbook-stage{gap:6px;}
+    .flip-arrow{width:38px;height:38px;}
+    .flipbook{width:min(62vw,280px);}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    [data-reveal]{opacity:1!important;transform:none!important;transition:none!important;}
+    .flip-page{transition:none!important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="logo" href="creativo-milano-landing.html">Creativo<span>Milano</span></a>
+  <a class="back-link" href="creativo-milano-landing.html">← Back to site</a>
+</header>
+
+<section class="profile-intro" data-reveal>
+  <p class="eyebrow-tag">Company Profile</p>
+  <h1>Who we are, on paper.</h1>
+  <p>Vision, services and a selection of completed projects — the same profile we share with new partners, now browsable right here.</p>
+  <a class="download-btn" href="Creativo-Milano-Company-Profile.pdf" download="Creativo-Milano-Company-Profile.pdf">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+    Download PDF
+  </a>
+</section>
+
+<section class="flipbook-section">
+  <div class="flipbook-stage">
+    <button class="flip-arrow" id="prevBtn" aria-label="Previous page">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+
+    <div class="flipbook" id="flipbook">
+      <!-- Pages stacked in order; JS controls the flip animation and z-index -->
+      <div class="flip-page" data-index="0"><img src="images/profile/profile-p01.jpg" alt="Company profile page 1"></div>
+      <div class="flip-page" data-index="1"><img src="images/profile/profile-p02.jpg" alt="Company profile page 2"></div>
+      <div class="flip-page" data-index="2"><img src="images/profile/profile-p03.jpg" alt="Company profile page 3"></div>
+      <div class="flip-page" data-index="3"><img src="images/profile/profile-p04.jpg" alt="Company profile page 4"></div>
+      <div class="flip-page" data-index="4"><img src="images/profile/profile-p05.jpg" alt="Company profile page 5"></div>
+      <div class="flip-page" data-index="5"><img src="images/profile/profile-p06.jpg" alt="Company profile page 6"></div>
+      <div class="flip-page" data-index="6"><img src="images/profile/profile-p07.jpg" alt="Company profile page 7"></div>
+      <div class="flip-page" data-index="7"><img src="images/profile/profile-p08.jpg" alt="Company profile page 8"></div>
+      <div class="flip-page" data-index="8"><img src="images/profile/profile-p09.jpg" alt="Company profile page 9"></div>
+    </div>
+
+    <button class="flip-arrow" id="nextBtn" aria-label="Next page">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+  </div>
+
+  <div class="flipbook-meta">
+    <div class="page-counter" id="pageCounter">Page 1 / 9</div>
+    <button class="fullscreen-btn" id="fullscreenBtn" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+      Fullscreen
+    </button>
+    <div class="thumb-strip" id="thumbStrip"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo"><img src="images/logo.png" alt=""><span>Creativo Milano</span></div>
+  <p>Creativo Milano — part of the <a href="https://www.outdoorfactory.com" target="_blank" rel="noopener">Outdoor Factory</a> group</p>
+</footer>
+
+<script>
+  // reveal-on-scroll (matches rest of site)
+  document.querySelectorAll('[data-reveal]').forEach(el => {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) { el.classList.add('in-view'); io.unobserve(el); } });
+    }, { threshold: .15 });
+    io.observe(el);
+  });
+
+  // ---------- 3D page-flip viewer ----------
+  const pages = Array.from(document.querySelectorAll('.flip-page'));
+  const total = pages.length;
+  let currentIndex = 0;
+
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const counterEl = document.getElementById('pageCounter');
+  const thumbStrip = document.getElementById('thumbStrip');
+  const flipbookEl = document.getElementById('flipbook');
+  const fullscreenBtn = document.getElementById('fullscreenBtn');
+
+  function restingZ(i, flipped) { return flipped ? i : (total - i); }
+
+  // initial stacking: page 0 on top, all unflipped
+  pages.forEach((p, i) => { p.style.zIndex = restingZ(i, false); });
+
+  // build thumbnail strip
+  pages.forEach((p, i) => {
+    const thumb = document.createElement('div');
+    thumb.className = 'thumb' + (i === 0 ? ' active' : '');
+    thumb.innerHTML = `<img src="${p.querySelector('img').src}" alt="Page ${i + 1} thumbnail">`;
+    thumb.addEventListener('click', () => jumpTo(i));
+    thumbStrip.appendChild(thumb);
+  });
+  const thumbs = Array.from(thumbStrip.children);
+
+  function updateUI() {
+    counterEl.textContent = `Page ${currentIndex + 1} / ${total}`;
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex === total - 1;
+    thumbs.forEach((t, i) => t.classList.toggle('active', i === currentIndex));
+  }
+
+  function goNext() {
+    if (currentIndex >= total - 1) return;
+    const p = pages[currentIndex];
+    p.style.zIndex = 999;
+    requestAnimationFrame(() => p.classList.add('flipped'));
+    currentIndex++;
+    updateUI();
+  }
+
+  function goPrev() {
+    if (currentIndex <= 0) return;
+    currentIndex--;
+    const p = pages[currentIndex];
+    p.style.zIndex = 999;
+    requestAnimationFrame(() => p.classList.remove('flipped'));
+    updateUI();
+  }
+
+  function jumpTo(target) {
+    if (target === currentIndex) return;
+    pages.forEach((p, i) => {
+      p.style.transition = 'none';
+      const flipped = i < target;
+      p.classList.toggle('flipped', flipped);
+      p.style.zIndex = restingZ(i, flipped);
+    });
+    requestAnimationFrame(() => {
+      pages.forEach(p => { p.style.transition = ''; });
+    });
+    currentIndex = target;
+    updateUI();
+  }
+
+  pages.forEach((p, i) => {
+    p.addEventListener('transitionend', () => {
+      const flipped = p.classList.contains('flipped');
+      p.style.zIndex = restingZ(i, flipped);
+    });
+  });
+
+  prevBtn.addEventListener('click', goPrev);
+  nextBtn.addEventListener('click', goNext);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') goPrev();
+    if (e.key === 'ArrowRight') goNext();
+  });
+
+  // touch swipe support
+  let touchStartX = null;
+  flipbookEl.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  flipbookEl.addEventListener('touchend', (e) => {
+    if (touchStartX === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 40) { dx < 0 ? goNext() : goPrev(); }
+    touchStartX = null;
+  }, { passive: true });
+
+  // fullscreen toggle
+  fullscreenBtn.addEventListener('click', () => {
+    const section = document.querySelector('.flipbook-section');
+    if (!document.fullscreenElement) {
+      section.requestFullscreen?.();
+    } else {
+      document.exitFullscreen?.();
+    }
+  });
+
+  updateUI();
+</script>
+
+</body>
+</html>
