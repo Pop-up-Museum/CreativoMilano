@@ -36,9 +36,9 @@
   const NOTIFY_EMAIL = 'info@creativomilano.it'; // used only for the mailto: fallback
   // =================================================================================
 
-  const isConfigured = ![EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY].includes('service_856rwlw')
-    && ![EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY].includes('template_zsxekqa')
-    && ![EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY].includes('WtOYvUHESdlrKvK_U');
+  const isConfigured = ![EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY].includes('YOUR_SERVICE_ID')
+    && ![EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY].includes('YOUR_TEMPLATE_ID')
+    && ![EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY].includes('YOUR_PUBLIC_KEY');
 
   // ---- The conversation script ----
   const STEPS = [
@@ -259,7 +259,7 @@
 
   function finishAndSend() {
     const typing = addTyping();
-    setTimeout(() => {
+    setTimeout(async () => {
       typing.remove();
       addMessage('bot', 'Perfect — sending this over to our team now…');
 
@@ -275,15 +275,20 @@
         page_url: window.location.href,
       };
 
-      if (isConfigured && window.emailjs) {
-        window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, payload, EMAILJS_PUBLIC_KEY)
-          .then(() => {
-            addMessage('bot', `Thanks, ${payload.name || 'there'}! We've got your details and will be in touch within 1–2 business days.`);
-          })
-          .catch(() => {
-            showFallback(payload);
-          });
+      const sdkReady = await sdkReadyPromise;
+
+      if (isConfigured && sdkReady && window.emailjs) {
+        try {
+          await window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, payload, EMAILJS_PUBLIC_KEY);
+          addMessage('bot', `Thanks, ${payload.name || 'there'}! We've got your details and will be in touch within 1–2 business days.`);
+        } catch (err) {
+          console.error('[project-intake] EmailJS send failed:', err);
+          showFallback(payload);
+        }
       } else {
+        if (isConfigured && !sdkReady) {
+          console.error('[project-intake] EmailJS was configured but the SDK never became ready — check the console above for why (network block, ad-blocker, or invalid keys).');
+        }
         showFallback(payload);
       }
     }, 500);
@@ -322,12 +327,28 @@
   closeBtn.addEventListener('click', closeWidget);
   overlay.addEventListener('click', (e) => { if (e.target === overlay) closeWidget(); });
 
-  // load EmailJS SDK once, quietly, if configured
+  // load EmailJS SDK once, quietly, if configured — tracked as a promise so
+  // finishAndSend() can safely wait for it instead of racing against it.
+  let sdkReadyPromise = Promise.resolve(false);
   if (isConfigured) {
-    const sdk = document.createElement('script');
-    sdk.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
-    sdk.onload = () => { window.emailjs.init(EMAILJS_PUBLIC_KEY); };
-    document.head.appendChild(sdk);
+    sdkReadyPromise = new Promise((resolve) => {
+      const sdk = document.createElement('script');
+      sdk.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+      sdk.onload = () => {
+        try {
+          window.emailjs.init(EMAILJS_PUBLIC_KEY);
+          resolve(true);
+        } catch (err) {
+          console.error('[project-intake] EmailJS init failed:', err);
+          resolve(false);
+        }
+      };
+      sdk.onerror = () => {
+        console.error('[project-intake] EmailJS SDK failed to load (network/CDN blocked?).');
+        resolve(false);
+      };
+      document.head.appendChild(sdk);
+    });
   }
 
   // attach to every trigger button on the page
