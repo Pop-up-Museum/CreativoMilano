@@ -111,6 +111,16 @@
   .project-label .meta{font-family:var(--font-mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.05em;
     color:var(--c);margin-top:.25rem;}
   .work-note{font-size:.84rem;color:var(--ink-soft);margin-top:2.2rem;font-style:italic;}
+  .list-divider{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--ink-soft);margin:2.4rem auto .8rem;max-width:800px;text-align:left;}
+  .work-list{max-width:800px;margin:0 auto;display:flex;flex-direction:column;}
+  .work-row{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--line);
+    transition:padding-left .25s ease;opacity:.8;}
+  .work-row:first-child{border-top:1px solid var(--line);}
+  .work-row:hover{padding-left:.6rem;}
+  .work-name{display:flex;align-items:center;gap:.9rem;font-family:var(--font-display);font-weight:500;font-size:.98rem;}
+  .work-name .dot{width:9px;height:9px;border-radius:50%;background:var(--ink-soft);flex-shrink:0;}
+  .work-meta{font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);}
 
   /* ---------- numbers ---------- */
   .numbers{padding:7rem 6%;}
@@ -276,56 +286,52 @@
     </div>
     <div class="project-grid">
 
-      <!-- Real project photography. Swap any src="images/..." path to update a photo — sizing and labels stay put. -->
+      <!-- Real project photography with full case studies. Swap src="images/..." to update a photo. -->
 
       <a class="project-card" href="dante-immersive.html" style="--c:var(--red)" data-reveal>
         <img src="images/hero-vr.jpg" alt="Visitor wearing a VR headset inside the Dante Immersive experience" loading="lazy">
         <div class="project-label"><div class="name">Dante Immersive ★ Flagship</div><div class="meta">Museums · Florence, Italy</div></div>
       </a>
 
-
       <a href="ddm.html" class="project-card" style="--c:var(--blue)" data-reveal>
         <img src="images/ddm-museum.jpeg" alt="Immersive screens inside the DDM digital experience museum" loading="lazy">
         <div class="project-label"><div class="name">DDM — Digital Experience Museum</div><div class="meta">Museums · Türkiye</div></div>
       </a>
 
-      <div class="project-card" style="--c:var(--orange)" data-reveal>
-        <img src="images/phaetonia-land.jpeg" alt="Themed street and rollercoaster at Phaetonia Land" loading="lazy">
-        <div class="project-label"><div class="name">Phaetonia Land</div><div class="meta">Theme parks</div></div>
-      </div>
-
-      <div class="project-card" style="--c:var(--red)" data-reveal>
-        <img src="images/karabakh-monument.jpeg" alt="Aerial view of the Karabakh Monument" loading="lazy">
-        <div class="project-label"><div class="name">Karabakh Monument</div><div class="meta">Monuments · Azerbaijan</div></div>
-      </div>
-
-      <div class="project-card" style="--c:var(--azure)" data-reveal>
-        <img src="images/festival-city.jpeg" alt="Sculptural arched facade of the Festival City building" loading="lazy">
-        <div class="project-label"><div class="name">Festival City</div><div class="meta">Urban architecture</div></div>
-      </div>
-
-      <div class="project-card" style="--c:var(--azure)" data-reveal>
-        <img src="images/campus-park.jpeg" alt="Aerial view of Campus Park's courts and playgrounds" loading="lazy">
-        <div class="project-label"><div class="name">Campus Park</div><div class="meta">Urban architecture</div></div>
-      </div>
-
-      <div class="project-card" style="--c:var(--orange)" data-reveal>
-        <img src="images/kids-town.jpeg" alt="Whimsical carriage and castle attraction at Kids Town" loading="lazy">
-        <div class="project-label"><div class="name">Kids Town</div><div class="meta">Theme parks</div></div>
-      </div>
-
-      <div class="project-card" style="--c:var(--orange)" data-reveal>
-        <img src="images/aqua-park.jpeg" alt="Aerial view of an aqua park resort with pools and slides" loading="lazy">
-        <div class="project-label"><div class="name">Aqua Park Resort</div><div class="meta">Theme parks</div></div>
-      </div>
-
-      <div class="project-card" style="--c:var(--blue)" data-reveal>
-        <img src="images/history-museum.jpeg" alt="Themed exhibit hall inside a history museum" loading="lazy">
-        <div class="project-label"><div class="name">History Museum</div><div class="meta">Museums</div></div>
-      </div>
-
     </div>
-    <p class="work-note">A selection from the studio's portfolio — more projects and full galleries available on request.</p>
+
+    <p class="list-divider">More completed projects</p>
+    <div class="work-list simple" data-reveal>
+      <div class="work-row">
+        <div class="work-name"><span class="dot"></span>Phaetonia Land</div>
+        <div class="work-meta">Theme parks</div>
+      </div>
+      <div class="work-row">
+        <div class="work-name"><span class="dot"></span>Karabakh Monument</div>
+        <div class="work-meta">Monuments · Azerbaijan</div>
+      </div>
+      <div class="work-row">
+        <div class="work-name"><span class="dot"></span>Festival City</div>
+        <div class="work-meta">Urban architecture</div>
+      </div>
+      <div class="work-row">
+        <div class="work-name"><span class="dot"></span>Campus Park</div>
+        <div class="work-meta">Urban architecture</div>
+      </div>
+      <div class="work-row">
+        <div class="work-name"><span class="dot"></span>Kids Town</div>
+        <div class="work-meta">Theme parks</div>
+      </div>
+      <div class="work-row">
+        <div class="work-name"><span class="dot"></span>Aqua Park Resort</div>
+        <div class="work-meta">Theme parks</div>
+      </div>
+      <div class="work-row">
+        <div class="work-name"><span class="dot"></span>History Museum</div>
+        <div class="work-meta">Museums</div>
+      </div>
+    </div>
+    <p class="work-note">Full case studies are online for Dante Immersive and DDM — more coming soon.</p>
   </section>
 
   <!-- ================= NUMBERS ================= -->

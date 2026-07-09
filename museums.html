@@ -73,8 +73,14 @@
   .work-row:first-child{border-top:1px solid var(--line);}
   .work-name{display:flex;align-items:center;gap:.9rem;font-family:var(--font-display);font-weight:600;font-size:1.05rem;}
   .work-name .dot{width:9px;height:9px;border-radius:50%;background:var(--c-main);flex-shrink:0;}
+  .work-thumb{width:44px;height:44px;border-radius:8px;object-fit:cover;flex-shrink:0;}
   .work-meta{font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);}
   .work-note{margin-top:1.6rem;font-size:.82rem;color:var(--ink-soft);font-style:italic;text-align:center;}
+  .list-divider{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--ink-soft);margin:2.4rem auto .8rem;max-width:800px;text-align:left;}
+  .work-list.simple .work-row{opacity:.8;}
+  .work-list.simple .work-name{font-weight:500;font-size:.98rem;}
+  .work-list.simple .dot{background:var(--ink-soft)!important;}
 
   /* ---------- cta ---------- */
   .svc-cta{padding:6.5rem 6%;text-align:center;background:var(--ink);color:var(--cream);overflow:hidden;position:relative;}
@@ -179,19 +185,23 @@
   </div>
   <div class="work-list" data-reveal>
     <a class="work-row" href="dante-immersive.html">
-      <div class="work-name"><span class="dot"></span>Dante Immersive</div>
+      <div class="work-name"><img class="work-thumb" src="images/hero-vr.jpg" alt="">Dante Immersive</div>
       <div class="work-meta">Florence, Italy</div>
     </a>
     <a class="work-row" href="ddm.html">
-      <div class="work-name"><span class="dot"></span>DDM — Digital Experience Museum</div>
+      <div class="work-name"><img class="work-thumb" src="images/p6-gallery-1.jpeg" alt="">DDM — Digital Experience Museum</div>
       <div class="work-meta">Türkiye</div>
     </a>
+  </div>
+
+  <p class="list-divider">Also completed</p>
+  <div class="work-list simple" data-reveal>
     <div class="work-row">
       <div class="work-name"><span class="dot"></span>History Museum</div>
       <div class="work-meta">Multi-location</div>
     </div>
   </div>
-  <p class="work-note">Full case study pages are online for Dante Immersive and DDM — more coming soon.</p>
+  <p class="work-note">Full case studies are online for Dante Immersive and DDM — more coming soon.</p>
 </section>
 
 <!-- ================= CTA ================= -->
