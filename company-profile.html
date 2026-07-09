@@ -49,21 +49,28 @@
   /* ---------- flipbook ---------- */
   .flipbook-section{padding:2rem 6% 3rem;display:flex;flex-direction:column;align-items:center;}
   .flipbook-stage{display:flex;align-items:center;gap:clamp(8px,2vw,28px);width:100%;max-width:900px;justify-content:center;}
-  .flip-arrow{flex-shrink:0;width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:var(--white);
-    color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s ease,transform .15s ease,opacity .2s ease;}
-  .flip-arrow:hover{background:var(--ink);color:var(--cream);}
+  .flip-arrow{flex-shrink:0;width:56px;height:56px;border-radius:50%;border:1px solid var(--line);background:var(--white);
+    color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 16px -6px rgba(0,0,0,.15);transition:background .2s ease,transform .15s ease,opacity .2s ease,box-shadow .2s ease;}
+  .flip-arrow:hover{background:var(--ink);color:var(--cream);box-shadow:0 10px 20px -6px rgba(0,0,0,.25);transform:scale(1.05);}
   .flip-arrow:active{transform:scale(.94);}
-  .flip-arrow:disabled{opacity:.25;cursor:default;pointer-events:none;}
-  .flip-arrow svg{width:20px;height:20px;}
+  .flip-arrow:disabled{opacity:.25;cursor:default;pointer-events:none;box-shadow:none;}
+  .flip-arrow svg{width:24px;height:24px;}
+  .flip-arrow-wrap{display:flex;flex-direction:column;align-items:center;gap:.5rem;flex-shrink:0;}
+  .flip-arrow-label{font-family:var(--font-mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.04em;
+    color:var(--ink-soft);}
 
   .flipbook{position:relative;width:min(72vw,340px);aspect-ratio:1000/1413;perspective:2600px;
     filter:drop-shadow(0 30px 50px rgba(0,0,0,.18));}
   .flip-page{position:absolute;inset:0;transform-origin:left center;transform-style:preserve-3d;
-    transition:transform .65s cubic-bezier(.45,0,.2,1);border-radius:4px;overflow:hidden;background:#fff;
+    transition:transform .65s cubic-bezier(.45,0,.2,1);border-radius:4px;overflow:hidden;
     box-shadow:1px 0 0 rgba(0,0,0,.06);}
-  .flip-page img{width:100%;height:100%;object-fit:cover;display:block;-webkit-user-drag:none;user-select:none;}
+  .flip-page img{width:100%;height:100%;object-fit:cover;display:block;-webkit-user-drag:none;user-select:none;
+    backface-visibility:hidden;position:relative;}
+  .flip-page::before{content:'';position:absolute;inset:0;background:#0a0a0a;
+    backface-visibility:hidden;transform:rotateY(180deg);}
   .flip-page.flipped{transform:rotateY(-170deg);}
-  .flip-page::after{content:'';position:absolute;inset:0;pointer-events:none;
+  .flip-page::after{content:'';position:absolute;inset:0;pointer-events:none;backface-visibility:hidden;
     background:linear-gradient(90deg,rgba(0,0,0,.16) 0%,transparent 12%,transparent 88%,rgba(0,0,0,.08) 100%);}
 
   .flipbook-meta{display:flex;flex-direction:column;align-items:center;gap:.9rem;margin-top:1.8rem;}
@@ -124,9 +131,12 @@
 
 <section class="flipbook-section">
   <div class="flipbook-stage">
-    <button class="flip-arrow" id="prevBtn" aria-label="Previous page">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-    </button>
+    <div class="flip-arrow-wrap">
+      <button class="flip-arrow" id="prevBtn" aria-label="Previous page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <span class="flip-arrow-label">Back</span>
+    </div>
 
     <div class="flipbook" id="flipbook">
       <!-- Pages stacked in order; JS controls the flip animation and z-index -->
@@ -141,9 +151,12 @@
       <div class="flip-page" data-index="8"><img src="images/profile/profile-p09.jpg" alt="Company profile page 9"></div>
     </div>
 
-    <button class="flip-arrow" id="nextBtn" aria-label="Next page">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-    </button>
+    <div class="flip-arrow-wrap">
+      <button class="flip-arrow" id="nextBtn" aria-label="Next page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+      <span class="flip-arrow-label">Next</span>
+    </div>
   </div>
 
   <div class="flipbook-meta">
