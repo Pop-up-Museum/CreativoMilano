@@ -81,6 +81,21 @@
   .work-list.simple .work-row{opacity:.8;}
   .work-list.simple .work-name{font-weight:500;font-size:.98rem;}
   .work-list.simple .dot{background:var(--ink-soft)!important;}
+  .scatter-gallery{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:120px;gap:8px;
+    max-width:1000px;margin:1.6rem auto 0;}
+  .scatter-gallery img{width:100%;height:100%;object-fit:cover;border-radius:8px;
+    transition:transform .3s ease,filter .3s ease;}
+  .scatter-gallery img:hover{transform:scale(1.04);filter:brightness(1.06);}
+  .scatter-gallery img:nth-child(1){grid-column:span 2;grid-row:span 2;}
+  .scatter-gallery img:nth-child(4){grid-column:span 2;}
+  .scatter-gallery img:nth-child(6){grid-column:span 2;grid-row:span 2;}
+  .scatter-gallery img:nth-child(9){grid-column:span 2;}
+  .scatter-gallery img:nth-child(11){grid-column:span 2;grid-row:span 2;}
+  @media (max-width:760px){
+    .scatter-gallery{grid-template-columns:repeat(3,1fr);grid-auto-rows:90px;}
+    .scatter-gallery img:nth-child(1),.scatter-gallery img:nth-child(6),.scatter-gallery img:nth-child(11){grid-column:span 2;grid-row:span 2;}
+    .scatter-gallery img:nth-child(4),.scatter-gallery img:nth-child(9){grid-column:span 1;}
+  }
 
   /* ---------- cta ---------- */
   .svc-cta{padding:6.5rem 6%;text-align:center;background:var(--ink);color:var(--cream);overflow:hidden;position:relative;}
@@ -103,6 +118,27 @@
   .footer-logo img{height:44px;width:auto;}
   .footer-logo span{font-family:var(--font-display);color:#fff;font-weight:700;font-size:1.4rem;
     text-transform:none;letter-spacing:0;}
+
+  /* ---------- lightbox ---------- */
+  .lightbox-overlay{position:fixed;inset:0;background:rgba(10,10,10,.92);z-index:9999;
+    display:flex;align-items:center;justify-content:center;padding:5vh 5vw;
+    opacity:0;pointer-events:none;transition:opacity .25s ease;}
+  .lightbox-overlay.open{opacity:1;pointer-events:auto;}
+  .lightbox-overlay img{max-width:100%;max-height:100%;border-radius:8px;
+    box-shadow:0 24px 70px rgba(0,0,0,.5);}
+  .lightbox-close,.lightbox-nav{position:absolute;border:none;color:#fff;cursor:pointer;
+    background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;
+    transition:background .2s ease,transform .2s ease;}
+  .lightbox-close:hover,.lightbox-nav:hover{background:rgba(255,255,255,.25);}
+  .lightbox-close{top:24px;right:24px;width:44px;height:44px;border-radius:50%;}
+  .lightbox-nav{top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;}
+  .lightbox-nav:hover{transform:translateY(-50%) scale(1.06);}
+  .lightbox-prev{left:16px;} .lightbox-next{right:16px;}
+  .lightbox-close svg,.lightbox-nav svg{width:20px;height:20px;}
+  @media (max-width:600px){
+    .lightbox-nav{width:38px;height:38px;} .lightbox-close{width:38px;height:38px;top:14px;right:14px;}
+    .lightbox-prev{left:8px;} .lightbox-next{right:8px;}
+  }
 
   @media (prefers-reduced-motion:reduce){
     [data-reveal]{opacity:1!important;transform:none!important;transition:none!important;}
@@ -194,62 +230,22 @@
     </a>
   </div>
 
-  <p class="list-divider">Also completed</p>
-  <div class="work-list simple" data-reveal>
-    <a class="work-row" href="health-museum-uzb.html">
-      <div class="work-name"><img class="work-thumb" src="images/Uzbekistan-Health-Museum3.jpg" alt="">Health Museum</div>
-      <div class="work-meta">Uzbekistan</div>
-    </a>
-    <a class="work-row" href="gallipoli-museum-bagcilar-tr.html">
-      <div class="work-name"><img class="work-thumb" src="images/canakkale zafer muzesi (3).jpg" alt="">Bağcılar Gallipoli Museum</div>
-      <div class="work-meta">Türkiye</div>
-    </a>
-    <a class="work-row" href="state-history-museum-uzb.html">
-      <div class="work-name"><img class="work-thumb" src="images/OZBEKISTAN DEVLET TARİHİ MUZE (3).jpg" alt="">State History Museum</div>
-      <div class="work-meta">Uzbekistan</div>
-    </a>
-    <a class="work-row" href="tea-museum-tr.html">
-      <div class="work-name"><img class="work-thumb" src="images/Çay Müzesi (9).jpg" alt="">Tea Museum</div>
-      <div class="work-meta">Türkiye</div>
-    </a>
-    <a class="work-row" href="konya-war-independence-museum-tr.html">
-      <div class="work-name"><img class="work-thumb" src="images/m1.jpg" alt="">Konya War of Independence Museum</div>
-      <div class="work-meta">Türkiye</div>
-    </a>
-    <a class="work-row" href="osmaniye-open-air-museum-tr.html">
-      <div class="work-name"><img class="work-thumb" src="images/2023 açık hava müzesi (7).jpg" alt="">Osmaniye Open-Air Museum</div>
-      <div class="work-meta">Türkiye</div>
-    </a>
-    <a class="work-row" href="july-15-democracy-museum-tr.html">
-      <div class="work-name"><img class="work-thumb" src="images/15 temmuz agac.jpg" alt="">July 15 Democracy Museum</div>
-      <div class="work-meta">Türkiye</div>
-    </a>
-    <a class="work-row" href="osmaniye-city-museum-tr.html">
-      <div class="work-name"><img class="work-thumb" src="images/muze-osmaniye.jpg" alt="">Osmaniye City Museum</div>
-      <div class="work-meta">Türkiye</div>
-    </a>
-    <a class="work-row" href="icc-uzb.html">
-      <div class="work-name"><img class="work-thumb" src="images/ICC (5).jpg" alt="">ICC</div>
-      <div class="work-meta">Uzbekistan</div>
-    </a>
-    <a class="work-row" href="democracy-freedoms-island-museum-tr.html">
-      <div class="work-name"><img class="work-thumb" src="images/demokrasi ve ozgurlukler muzesi yassıada (3).jpg" alt="">Democracy and Freedoms Island Museum</div>
-      <div class="work-meta">Türkiye</div>
-    </a>
-    <a class="work-row" href="imam-bukhari-museum-uzb.html">
-      <div class="work-name"><img class="work-thumb" src="images/250910_SALON 2 (002).jpg" alt="">Imam Bukhari Museum</div>
-      <div class="work-meta">Uzbekistan</div>
-    </a>
-    <a class="work-row" href="urla-city-history-archive-museum-tr.html">
-      <div class="work-name"><img class="work-thumb" src="images/Urla Muze_Fotograf (1).jpg" alt="">Urla City History Archive Museum</div>
-      <div class="work-meta">Türkiye</div>
-    </a>
-    <a class="work-row" href="emaar-arabic-music-museum-dubai.html">
-      <div class="work-name"><img class="work-thumb" src="images/aaic music museum (1).jpg" alt="">Emaar Arabic Music Museum</div>
-      <div class="work-meta">Dubai, UAE</div>
-    </a>
+  <p class="list-divider">More from around the world</p>
+  <div class="scatter-gallery" data-reveal>
+    <img src="images/Uzbekistan-Health-Museum3.jpg" alt="" loading="lazy">
+    <img src="images/canakkale zafer muzesi (3).jpg" alt="" loading="lazy">
+    <img src="images/OZBEKISTAN DEVLET TARİHİ MUZE (3).jpg" alt="" loading="lazy">
+    <img src="images/Çay Müzesi (9).jpg" alt="" loading="lazy">
+    <img src="images/m1.jpg" alt="" loading="lazy">
+    <img src="images/2023 açık hava müzesi (7).jpg" alt="" loading="lazy">
+    <img src="images/15 temmuz agac.jpg" alt="" loading="lazy">
+    <img src="images/muze-osmaniye.jpg" alt="" loading="lazy">
+    <img src="images/ICC (5).jpg" alt="" loading="lazy">
+    <img src="images/demokrasi ve ozgurlukler muzesi yassıada (3).jpg" alt="" loading="lazy">
+    <img src="images/250910_SALON 2 (002).jpg" alt="" loading="lazy">
+    <img src="images/Urla Muze_Fotograf (1).jpg" alt="" loading="lazy">
+    <img src="images/aaic music museum (1).jpg" alt="" loading="lazy">
   </div>
-  <p class="work-note">Full case studies are online for Dante Immersive and DDM — more coming soon.</p>
 </section>
 
 <!-- ================= CTA ================= -->
@@ -278,6 +274,57 @@
     });
   }, {threshold:.15});
   reveal.forEach(el=>io.observe(el));
+
+  // ---------- lightbox: click any gallery photo to view it larger, arrows/keys to browse ----------
+  (function(){
+    const items = Array.from(document.querySelectorAll('.scatter-gallery img'));
+    if(!items.length) return;
+    let current = 0;
+
+    const overlay = document.createElement('div');
+    overlay.className = 'lightbox-overlay';
+    overlay.innerHTML = `
+      <button class="lightbox-close" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <button class="lightbox-nav lightbox-prev" aria-label="Previous photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <img src="" alt="">
+      <button class="lightbox-nav lightbox-next" aria-label="Next photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      </button>`;
+    document.body.appendChild(overlay);
+
+    const imgEl = overlay.querySelector('img');
+    const closeBtn = overlay.querySelector('.lightbox-close');
+    const prevBtn = overlay.querySelector('.lightbox-prev');
+    const nextBtn = overlay.querySelector('.lightbox-next');
+
+    function show(i){
+      current = (i + items.length) % items.length;
+      imgEl.src = items[current].currentSrc || items[current].src;
+      imgEl.alt = items[current].alt || '';
+    }
+    function openBox(i){ show(i); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeBox(){ overlay.classList.remove('open'); document.body.style.overflow = ''; }
+
+    items.forEach((img, i) => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => openBox(i));
+    });
+
+    closeBtn.addEventListener('click', closeBox);
+    overlay.addEventListener('click', (e) => { if(e.target === overlay) closeBox(); });
+    prevBtn.addEventListener('click', () => show(current - 1));
+    nextBtn.addEventListener('click', () => show(current + 1));
+    document.addEventListener('keydown', (e) => {
+      if(!overlay.classList.contains('open')) return;
+      if(e.key === 'Escape') closeBox();
+      if(e.key === 'ArrowLeft') show(current - 1);
+      if(e.key === 'ArrowRight') show(current + 1);
+    });
+  })();
 </script>
 
 <script src="project-intake.js"></script>
