@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Osmaniye Open-Air Museum — Creativo Milano</title>
+<meta name="description" content="Osmaniye Open-Air Museum, Türkiye — a Creativo Milano museum project.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23FCB040'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FAF8F3; --white:#FFFFFF; --ink:#18181A; --ink-soft:#5C5C57; --line:#E5E1D6;
+    --red:#BF1E2E; --orange:#F1592A; --yellow:#FCB040; --green:#8CC63F; --azure:#25AAE1; --blue:#0F75BC;
+    --font-display:'Space Grotesk',sans-serif; --font-body:'Inter',sans-serif; --font-mono:'JetBrains Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:var(--font-body);color:var(--ink);background:var(--cream);line-height:1.6;}
+  a{color:inherit;}
+
+  .nav{position:fixed;top:0;left:0;width:100%;z-index:900;display:flex;align-items:center;justify-content:space-between;
+    padding:20px 6%;background:rgba(250,248,243,.92);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line);}
+  .logo{font-family:var(--font-display);font-weight:700;font-size:1.1rem;letter-spacing:-.02em;text-decoration:none;}
+  .logo span{color:var(--blue);font-weight:500;}
+  .back-link{font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;
+    text-decoration:none;color:var(--ink);opacity:.75;transition:opacity .2s ease;}
+  .back-link:hover{opacity:1;}
+
+  .placeholder-hero{min-height:82vh;display:flex;align-items:center;justify-content:center;text-align:center;
+    padding:7rem 6% 4rem;background:linear-gradient(135deg,var(--blue) 0%,#0a4d7d 100%);color:var(--cream);position:relative;overflow:hidden;}
+  .placeholder-hero::before{content:'';position:absolute;inset:0;opacity:.15;
+    background-image:radial-gradient(circle at 20% 30%,#fff 0,transparent 40%),radial-gradient(circle at 80% 70%,#fff 0,transparent 35%);}
+  .hero-content{position:relative;z-index:2;max-width:640px;}
+  .eyebrow-tag{font-family:var(--font-mono);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--yellow);margin-bottom:1.4rem;display:flex;align-items:center;justify-content:center;gap:.6rem;}
+  .eyebrow-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange);}
+  .placeholder-hero h1{font-family:var(--font-display);font-weight:700;font-size:clamp(2rem,5vw,3.2rem);
+    line-height:1.12;margin-bottom:1.2rem;letter-spacing:-.02em;}
+  .placeholder-hero p{font-size:1rem;color:rgba(250,248,243,.8);margin-bottom:2rem;}
+  .btn-secondary{font-family:var(--font-mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;
+    background:transparent;color:var(--cream);padding:.9rem 1.6rem;border-radius:40px;text-decoration:none;
+    border:1px solid rgba(250,248,243,.4);display:inline-block;transition:background .25s ease;}
+  .btn-secondary:hover{background:rgba(250,248,243,.1);}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.6);padding:2.6rem 6% 2.2rem;text-align:center;
+    font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;}
+  footer a{text-decoration:underline;color:rgba(255,255,255,.8);}
+  .footer-logo{display:flex;align-items:center;justify-content:center;gap:.7rem;margin-bottom:1.2rem;}
+  .footer-logo img{height:44px;width:auto;}
+  .footer-logo span{font-family:var(--font-display);color:#fff;font-weight:700;font-size:1.4rem;
+    text-transform:none;letter-spacing:0;}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="logo" href="creativo-milano-landing.html">Creativo<span>Milano</span></a>
+  <a class="back-link" href="museums.html">← Back to Museums</a>
+</header>
+
+<section class="placeholder-hero">
+  <div class="hero-content">
+    <p class="eyebrow-tag">Museum · Türkiye</p>
+    <h1>Osmaniye Open-Air Museum</h1>
+    <p>Photography and full project details for this museum are being finalized — check back soon, or ask us directly for more.</p>
+    <a class="btn-secondary" href="museums.html">See other Museum projects</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo"><img src="images/logo1.png" alt=""><span>Creativo Milano</span></div>
+  <p>Creativo Milano — part of the <a href="https://www.outdoorfactory.com" target="_blank" rel="noopener">Outdoor Factory</a> group · <a href="cookie-policy.html">Cookie Policy</a></p>
+</footer>
+
+<script src="cookie-consent.js"></script>
+</body>
+</html>
