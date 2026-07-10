@@ -51,6 +51,19 @@
   .footer-logo img{height:44px;width:auto;}
   .footer-logo span{font-family:var(--font-display);color:#fff;font-weight:700;font-size:1.4rem;
     text-transform:none;letter-spacing:0;}
+
+  .museum-info{padding:5rem 6%;max-width:900px;margin:0 auto;}
+  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.6rem;margin-bottom:3rem;
+    padding-bottom:2.5rem;border-bottom:1px solid var(--line);}
+  .info-item .label{font-family:var(--font-mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--blue);margin-bottom:.4rem;}
+  .info-item .value{font-family:var(--font-display);font-weight:600;font-size:1rem;line-height:1.3;}
+  .museum-info p.description{color:var(--ink-soft);font-size:1.02rem;line-height:1.75;margin-bottom:1.6rem;}
+  .detail-callout{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--yellow);
+    border-radius:8px;padding:1.2rem 1.4rem;font-size:.92rem;color:var(--ink-soft);}
+  .detail-callout strong{color:var(--ink);font-family:var(--font-display);font-weight:600;}
+  .btn-secondary-light{font-family:var(--font-mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;background:transparent;color:var(--ink);padding:.9rem 1.6rem;border-radius:40px;text-decoration:none;border:1px solid var(--line);display:inline-block;transition:background .25s ease,color .25s ease;}
+  .btn-secondary-light:hover{background:var(--ink);color:var(--cream);}
 </style>
 </head>
 <body>
@@ -65,9 +78,22 @@
   <div class="hero-content">
     <p class="eyebrow-tag">Museum · Türkiye</p>
     <h1>Osmaniye City Museum</h1>
-    <p>Photography and full project details for this museum are being finalized — check back soon, or ask us directly for more.</p>
-    <a class="btn-secondary" href="museums.html">See other Museum projects</a>
   </div>
+</section>
+
+<section class="museum-info">
+  <div class="info-grid">
+    <div class="info-item"><div class="label">Official name</div><div class="value">Osmaniye Kent Müzesi</div></div>
+    <div class="info-item"><div class="label">City &amp; country</div><div class="value">Osmaniye, Türkiye</div></div>
+    <div class="info-item"><div class="label">Year</div><div class="value">2014</div></div>
+    <div class="info-item"><div class="label">Type</div><div class="value">Civic, historical &amp; folkloric museum</div></div>
+    <div class="info-item"><div class="label">Target audience</div><div class="value">Local residents, schools, tourists</div></div>
+  </div>
+  <p class="description">This city museum preserves and showcases the social, cultural and economic history of Osmaniye through engaging, realistic visual displays. It features a prominent traditional bazaar area where lifelike wax figures depict historical local tradesmen and artisans at work, with ambient audio and interactive panels completing the feeling of stepping back into an authentic Anatolian town.</p>
+  <div class="detail-callout"><strong>A distinctive detail — </strong>Among the most appreciated wax reconstructions are a traditional Turkish coffeehouse and historic artisan workshops recreated down to the smallest detail.</div>
+  <p style="text-align:center;margin-top:2.6rem;">
+    <a class="btn-secondary-light" href="museums.html">See other Museum projects</a>
+  </p>
 </section>
 
 <footer>

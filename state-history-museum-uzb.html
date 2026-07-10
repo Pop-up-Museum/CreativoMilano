@@ -51,6 +51,19 @@
   .footer-logo img{height:44px;width:auto;}
   .footer-logo span{font-family:var(--font-display);color:#fff;font-weight:700;font-size:1.4rem;
     text-transform:none;letter-spacing:0;}
+
+  .museum-info{padding:5rem 6%;max-width:900px;margin:0 auto;}
+  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.6rem;margin-bottom:3rem;
+    padding-bottom:2.5rem;border-bottom:1px solid var(--line);}
+  .info-item .label{font-family:var(--font-mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--blue);margin-bottom:.4rem;}
+  .info-item .value{font-family:var(--font-display);font-weight:600;font-size:1rem;line-height:1.3;}
+  .museum-info p.description{color:var(--ink-soft);font-size:1.02rem;line-height:1.75;margin-bottom:1.6rem;}
+  .detail-callout{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--yellow);
+    border-radius:8px;padding:1.2rem 1.4rem;font-size:.92rem;color:var(--ink-soft);}
+  .detail-callout strong{color:var(--ink);font-family:var(--font-display);font-weight:600;}
+  .btn-secondary-light{font-family:var(--font-mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;background:transparent;color:var(--ink);padding:.9rem 1.6rem;border-radius:40px;text-decoration:none;border:1px solid var(--line);display:inline-block;transition:background .25s ease,color .25s ease;}
+  .btn-secondary-light:hover{background:var(--ink);color:var(--cream);}
 </style>
 </head>
 <body>
@@ -65,13 +78,26 @@
   <div class="hero-content">
     <p class="eyebrow-tag">Museum · Uzbekistan</p>
     <h1>State History Museum</h1>
-    <p>Photography and full project details for this museum are being finalized — check back soon, or ask us directly for more.</p>
-    <a class="btn-secondary" href="museums.html">See other Museum projects</a>
   </div>
 </section>
 
+<section class="museum-info">
+  <div class="info-grid">
+    <div class="info-item"><div class="label">Official name</div><div class="value">State Museum of History of Uzbekistan</div></div>
+    <div class="info-item"><div class="label">City &amp; country</div><div class="value">Tashkent, Uzbekistan</div></div>
+    <div class="info-item"><div class="label">Year</div><div class="value">Founded 1876 · exhibition modernization ongoing</div></div>
+    <div class="info-item"><div class="label">Type</div><div class="value">National historical &amp; archaeological museum</div></div>
+    <div class="info-item"><div class="label">Target audience</div><div class="value">International tourists, schools, researchers, general public</div></div>
+  </div>
+  <p class="description">As one of the oldest and most significant museums in Central Asia, this institution showcases the rich historical tapestry of Uzbekistan from the Paleolithic era to modern times. The updated exhibition spaces integrate traditional artifact displays with modern interactive screens and digital touchpoints to engage contemporary audiences, guiding visitors through the region's cultural, scientific and architectural evolution.</p>
+  <div class="detail-callout"><strong>A distinctive detail — </strong>Among the most significant pieces on display is a large bronze Buddha recovered at Fayaz Tepe, alongside ancient Zoroastrian remains.</div>
+  <p style="text-align:center;margin-top:2.6rem;">
+    <a class="btn-secondary-light" href="museums.html">See other Museum projects</a>
+  </p>
+</section>
+
 <footer>
-  <div class="footer-logo"><img src="images/logo1.png" alt=""><span>Creativo Milano</span></div>
+  <div class="footer-logo"><img src="images/Logo1.png" alt=""><span>Creativo Milano</span></div>
   <p>Creativo Milano — part of the <a href="https://www.outdoorfactory.com" target="_blank" rel="noopener">Outdoor Factory</a> group · <a href="cookie-policy.html">Cookie Policy</a></p>
 </footer>
 
