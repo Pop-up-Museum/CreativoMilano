@@ -118,6 +118,9 @@
       display:flex;align-items:center;justify-content:center;cursor:pointer;}
     .pi-send svg{width:16px;height:16px;color:var(--ink,#18181A);}
     .pi-error{font-size:.76rem;color:var(--red,#BF1E2E);padding:0 1.2rem;}
+    .pi-privacy-note{font-size:.68rem;color:var(--ink-soft,#5C5C57);padding:.5rem 1.2rem 0;text-align:center;
+      border-top:1px solid var(--line,#E5E1D6);}
+    .pi-privacy-note a{color:var(--blue,#0F75BC);}
     .pi-progress{height:3px;background:var(--line,#E5E1D6);flex-shrink:0;}
     .pi-progress-fill{height:100%;background:var(--yellow,#FCB040);transition:width .3s ease;}
     .pi-typing{display:flex;gap:4px;align-items:center;padding:.7rem .95rem;}
@@ -144,6 +147,7 @@
         </button>
       </div>
       <div class="pi-body" id="piBody"></div>
+      <p class="pi-privacy-note">Your answers are sent to our team to reply to you. See our <a href="cookie-policy.html" target="_blank">Privacy &amp; Cookie Policy</a>.</p>
     </div>
   `;
   document.body.appendChild(overlay);
