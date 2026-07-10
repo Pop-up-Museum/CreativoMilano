@@ -25,7 +25,7 @@
 
 (function () {
   // ================= CONFIG =================
-  const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // replace with your real GA4 Measurement ID
+  const GA_MEASUREMENT_ID = 'G-45VFXV61RX'; // real GA4 Measurement ID
   const CONSENT_KEY = 'cm_cookie_consent'; // 'accepted' | 'rejected'
   // ============================================
 
