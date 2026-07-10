@@ -39,11 +39,10 @@
   table{width:100%;border-collapse:collapse;margin:1rem 0 1.6rem;font-size:.88rem;}
   th,td{text-align:left;padding:.7rem .8rem;border-bottom:1px solid var(--line);color:var(--ink-soft);}
   th{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--ink);}
-  .note{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:1.2rem 1.4rem;
-    font-size:.88rem;color:var(--ink-soft);margin-top:2.6rem;}
   .settings-btn{font-family:var(--font-mono);font-size:.76rem;text-transform:uppercase;letter-spacing:.04em;
     background:var(--ink);color:var(--cream);padding:.7rem 1.2rem;border-radius:30px;border:none;cursor:pointer;
-    margin-top:1rem;}
+    margin-top:1rem;transition:opacity .2s ease;}
+  .settings-btn:hover{opacity:.85;}
 
   footer{background:var(--ink);color:rgba(255,255,255,.6);padding:2.2rem 6%;text-align:center;
     font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;}
@@ -91,11 +90,7 @@
   <h2>Changes to this policy</h2>
   <p>We may update this page as the site evolves — for example if we add new tools or forms. The "last updated" date at the top will always reflect the latest version.</p>
 
-  <button class="settings-btn" onclick="window.cmReopenCookieBanner && window.cmReopenCookieBanner()">Change cookie settings</button>
-
-  <div class="note">
-    This page is written in plain language to be genuinely useful to visitors, and covers the cookies and data flows actually used on this site today. It isn't a substitute for formal legal advice — before relying on it as your final, published policy, it's worth a quick review by a lawyer familiar with GDPR and Italian data protection law.
-  </div>
+  <button class="settings-btn" id="cookieSettingsBtn" type="button">Change cookie settings</button>
 </main>
 
 <footer>

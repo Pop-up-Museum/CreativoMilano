@@ -121,4 +121,10 @@
   window.cmReopenCookieBanner = function () {
     showBanner();
   };
+
+  // Auto-wire any "change cookie settings" button on the page — no extra
+  // script needed per page, this just works wherever the button exists.
+  document.querySelectorAll('#cookieSettingsBtn, .cm-cookie-settings-btn').forEach((btn) => {
+    btn.addEventListener('click', showBanner);
+  });
 })();

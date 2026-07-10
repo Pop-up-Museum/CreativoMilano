@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Struttura NAS — Creativo</title>
+<style>
+  :root {
+    --didart: #b8860b;
+    --didart-bg: #fdf6e3;
+    --creativo: #2f6f4f;
+    --creativo-bg: #eaf5ef;
+    --outdoor: #34495e;
+    --outdoor-bg: #eef2f5;
+    --ink: #1c1917;
+    --muted: #78716c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #fafaf9;
+    color: var(--ink);
+    margin: 0;
+    padding: 40px 20px;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  h1 {
+    font-size: 26px;
+    margin-bottom: 4px;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 32px;
+  }
+  .root-label {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--ink);
+    padding: 6px 14px;
+    border-radius: 6px;
+    margin-bottom: 24px;
+    font-family: monospace;
+  }
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .brand {
+    border-radius: 12px;
+    padding: 18px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .brand.didart { background: var(--didart-bg); }
+  .brand.creativo { background: var(--creativo-bg); }
+  .brand.outdoor { background: var(--outdoor-bg); }
+
+  .brand-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .didart .dot { background: var(--didart); }
+  .creativo .dot { background: var(--creativo); }
+  .outdoor .dot { background: var(--outdoor); }
+
+  .brand-title {
+    font-size: 17px;
+    font-weight: 700;
+  }
+  .didart .brand-title { color: var(--didart); }
+  .creativo .brand-title { color: var(--creativo); }
+  .outdoor .brand-title { color: var(--outdoor); }
+
+  .brand-desc {
+    font-size: 12.5px;
+    color: var(--muted);
+    margin-bottom: 14px;
+    line-height: 1.4;
+  }
+
+  ul.tree {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul.tree li {
+    font-size: 13.5px;
+    padding: 7px 10px;
+    margin-bottom: 6px;
+    background: rgba(255,255,255,0.65);
+    border-radius: 6px;
+    border-left: 3px solid transparent;
+  }
+  .didart ul.tree li { border-left-color: var(--didart); }
+  .creativo ul.tree li { border-left-color: var(--creativo); }
+  .outdoor ul.tree li { border-left-color: var(--outdoor); }
+
+  ul.tree li .note {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .legend {
+    margin-top: 32px;
+    padding: 16px 18px;
+    background: #fff;
+    border: 1px solid #e7e5e4;
+    border-radius: 10px;
+    font-size: 13px;
+    color: #44403c;
+    line-height: 1.6;
+  }
+  .legend b { color: var(--ink); }
+  .legend-title {
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  @media (max-width: 800px) {
+    .columns { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Struttura archivio NAS — /volume1/Creativo</h1>
+  <div class="subtitle">Tre brand, tre modi di lavorare — schema attuale</div>
+  <div class="root-label">📁 /volume1/Creativo</div>
+
+  <div class="columns">
+
+    <!-- DIDART -->
+    <div class="brand didart">
+      <div class="brand-header">
+        <div class="dot"></div>
+        <div class="brand-title">Didart</div>
+      </div>
+      <div class="brand-desc">Galleria d'arte — artisti, mostre, materiale espositivo</div>
+      <ul class="tree">
+        <li>Artisti<span class="note">una cartella per artista</span></li>
+        <li>Mostre<span class="note">divise per anno (2024, 2025...)</span></li>
+        <li>Cataloghi</li>
+        <li>Fiere</li>
+        <li>Logo e grafiche</li>
+        <li>Foto</li>
+        <li>Poster Didart</li>
+        <li>Didart galleria web sito codici<span class="note">file tecnici del sito</span></li>
+      </ul>
+    </div>
+
+    <!-- CREATIVO -->
+    <div class="brand creativo">
+      <div class="brand-header">
+        <div class="dot"></div>
+        <div class="brand-title">Creativo</div>
+      </div>
+      <div class="brand-desc">Agenzia — clienti business e pratiche aziendali</div>
+      <ul class="tree">
+        <li>Antonio Conforti<span class="note">cliente</span></li>
+        <li>Videx<span class="note">cliente</span></li>
+        <li>Goppion<span class="note">cliente</span></li>
+        <li>Mirabilandia<span class="note">cliente</span></li>
+        <li>Bianucci Cinelli Studio<span class="note">cliente</span></li>
+        <li>AQ lab - carte da parete<span class="note">cliente</span></li>
+        <li>Ask4Location<span class="note">cliente</span></li>
+        <li>kny design gmbh<span class="note">cliente</span></li>
+        <li>Design week - Milano<span class="note">progetto</span></li>
+        <li>Progetti</li>
+        <li>Presentazioni</li>
+        <li>Inviti per permesso</li>
+        <li>Fatture<span class="note">amministrativo agenzia</span></li>
+        <li>Carta intestata<span class="note">amministrativo agenzia</span></li>
+        <li>Viaggi aziendali<span class="note">amministrativo agenzia</span></li>
+      </ul>
+    </div>
+
+    <!-- OUTDOOR FACTORY -->
+    <div class="brand outdoor">
+      <div class="brand-header">
+        <div class="dot"></div>
+        <div class="brand-title">Outdoor Factory</div>
+      </div>
+      <div class="brand-desc">Produzioni immersive — musei, allestimenti, staff</div>
+      <ul class="tree">
+        <li>Progetti<span class="note">es. Dante - Immersive, Zoomin</span></li>
+        <li>Visuals</li>
+        <li>Presentazioni<span class="note">contiene Company Profile</span></li>
+        <li>profilo impiegati<span class="note">schede staff</span></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="legend">
+    <span class="legend-title">Come leggerla</span>
+    <b>Tre macro-aree allo stesso livello</b> dentro la cartella condivisa Creativo: ognuna corrisponde a un'entità/brand reale con cui lavorate, non a una categoria astratta.<br>
+    <b>Didart</b> è organizzata per funzione (artisti, mostre, cataloghi...), utile perché il materiale ruota attorno a eventi ed espositori.<br>
+    <b>Creativo</b> mescola clienti singoli e cartelle amministrative trasversali (Fatture, Carta intestata) allo stesso livello — è la parte che beneficerebbe di più di una struttura a template ripetibile per cliente.<br>
+    <b>Outdoor Factory</b> è organizzata per progetto/produzione, coerente con il tipo di lavoro (ogni progetto ha vita propria, spesso con partner esterni).
+  </div>
+</div>
+</body>
+</html>
