@@ -17,7 +17,7 @@
  *    anywhere in the template body/subject — they'll be filled in
  *    automatically from the chat:
  *      {{project_type}}  {{stage}}  {{timeline}}  {{budget}}
- *      {{location}}  {{name}}  {{email}}  {{phone}}  {{page_url}}
+ *      {{location}}  {{details}}  {{name}}  {{email}}  {{phone}}  {{page_url}}
  *    Note the TEMPLATE ID.
  * 4. Account → General → copy your Public Key.
  * 5. Paste all three values into the CONFIG block just below.
@@ -68,8 +68,13 @@
       placeholder: 'e.g. Milan, Italy',
     },
     {
+      key: 'details', type: 'text',
+      q: 'Anything else you want to share about the project? (Feel free to write as much as you need)',
+      placeholder: 'Type your notes here...',
+    },
+    {
       key: 'name', type: 'text',
-      q: "Last step — who should we address our reply to?",
+      q: "Almost done — who should we address our reply to?",
       placeholder: 'Your name',
     },
     {
@@ -273,6 +278,7 @@
         timeline: answers.timeline || '',
         budget: answers.budget || '',
         location: answers.location || '',
+        details: answers.details || '',
         name: answers.name || '',
         email: answers.email || '',
         phone: '',
@@ -302,7 +308,7 @@
     addMessage('bot', "I couldn't send that automatically, but I've prepared an email for you — just hit send in your mail app.");
     const subject = encodeURIComponent(`New project inquiry — ${payload.project_type || 'General'}`);
     const body = encodeURIComponent(
-      `Project type: ${payload.project_type}\nStage: ${payload.stage}\nTimeline: ${payload.timeline}\nBudget: ${payload.budget}\nLocation: ${payload.location}\nName: ${payload.name}\nEmail: ${payload.email}\nPage: ${payload.page_url}`
+      `Project type: ${payload.project_type}\nStage: ${payload.stage}\nTimeline: ${payload.timeline}\nBudget: ${payload.budget}\nLocation: ${payload.location}\nDetails: ${payload.details}\nName: ${payload.name}\nEmail: ${payload.email}\nPage: ${payload.page_url}`
     );
     const mailtoLink = document.createElement('a');
     mailtoLink.href = `mailto:${NOTIFY_EMAIL}?subject=${subject}&body=${body}`;
