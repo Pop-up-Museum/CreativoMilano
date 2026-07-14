@@ -64,6 +64,29 @@
   .detail-callout strong{color:var(--ink);font-family:var(--font-display);font-weight:600;}
   .btn-secondary-light{font-family:var(--font-mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;background:transparent;color:var(--ink);padding:.9rem 1.6rem;border-radius:40px;text-decoration:none;border:1px solid var(--line);display:inline-block;transition:background .25s ease,color .25s ease;}
   .btn-secondary-light:hover{background:var(--ink);color:var(--cream);}
+
+  .museum-gallery{padding:1rem 6% 5.5rem;max-width:1000px;margin:0 auto;}
+  .museum-gallery h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.4rem,2.6vw,1.8rem);
+    text-align:center;margin-bottom:2rem;color:var(--ink);}
+  .museum-gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));grid-auto-rows:170px;gap:10px;}
+  .museum-gallery-grid img{width:100%;height:100%;object-fit:cover;border-radius:10px;cursor:zoom-in;
+    transition:transform .3s ease,filter .3s ease;}
+  .museum-gallery-grid img:hover{transform:scale(1.03);filter:brightness(1.05);}
+
+  .lightbox-overlay{position:fixed;inset:0;background:rgba(10,10,10,.92);z-index:9999;
+    display:flex;align-items:center;justify-content:center;padding:5vh 5vw;
+    opacity:0;pointer-events:none;transition:opacity .25s ease;}
+  .lightbox-overlay.open{opacity:1;pointer-events:auto;}
+  .lightbox-overlay img{max-width:100%;max-height:100%;border-radius:8px;box-shadow:0 24px 70px rgba(0,0,0,.5);cursor:auto;}
+  .lightbox-close,.lightbox-nav{position:absolute;border:none;color:#fff;cursor:pointer;
+    background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;
+    transition:background .2s ease,transform .2s ease;}
+  .lightbox-close:hover,.lightbox-nav:hover{background:rgba(255,255,255,.25);}
+  .lightbox-close{top:24px;right:24px;width:44px;height:44px;border-radius:50%;}
+  .lightbox-nav{top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;}
+  .lightbox-nav:hover{transform:translateY(-50%) scale(1.06);}
+  .lightbox-prev{left:16px;} .lightbox-next{right:16px;}
+  .lightbox-close svg,.lightbox-nav svg{width:20px;height:20px;}
 </style>
 </head>
 <body>
@@ -94,6 +117,28 @@
   <p style="text-align:center;margin-top:2.6rem;">
     <a class="btn-secondary-light" href="museums.html">See other Museum projects</a>
   </p>
+
+</section>
+<section class="museum-gallery">
+  <h2>More from this project</h2>
+  <div class="museum-gallery-grid">
+    <img src="images/ICC (1).jpg" alt="" loading="lazy">
+    <img src="images/ICC (2).jpg" alt="" loading="lazy">
+    <img src="images/ICC (3).jpg" alt="" loading="lazy">
+    <img src="images/ICC (4).jpg" alt="" loading="lazy">
+    <img src="images/ICC (5).jpg" alt="" loading="lazy">
+    <img src="images/ICC (6).jpg" alt="" loading="lazy">
+    <img src="images/ICC (7).jpg" alt="" loading="lazy">
+    <img src="images/ICC (8).jpg" alt="" loading="lazy">
+    <img src="images/ICC (9).jpg" alt="" loading="lazy">
+    <img src="images/ICC (10).jpg" alt="" loading="lazy">
+    <img src="images/ICC (11).jpg" alt="" loading="lazy">
+    <img src="images/ICC (12).jpg" alt="" loading="lazy">
+    <img src="images/ICC (13).jpg" alt="" loading="lazy">
+    <img src="images/ICC (14).jpg" alt="" loading="lazy">
+    <img src="images/ICC (15).jpg" alt="" loading="lazy">
+    <img src="images/ICC (16).jpg" alt="" loading="lazy">
+  </div>
 </section>
 
 <footer>
@@ -102,5 +147,36 @@
 </footer>
 
 <script src="cookie-consent.js"></script>
+
+<script>
+  (function(){
+    const items = Array.from(document.querySelectorAll('.museum-gallery-grid img'));
+    if(!items.length) return;
+    let current = 0;
+    const overlay = document.createElement('div');
+    overlay.className = 'lightbox-overlay';
+    overlay.innerHTML = `
+      <button class="lightbox-close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      <button class="lightbox-nav lightbox-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+      <img src="" alt="">
+      <button class="lightbox-nav lightbox-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>`;
+    document.body.appendChild(overlay);
+    const imgEl = overlay.querySelector('img');
+    function show(i){ current = (i + items.length) % items.length; imgEl.src = items[current].src; imgEl.alt = items[current].alt || ''; }
+    function openBox(i){ show(i); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeBox(){ overlay.classList.remove('open'); document.body.style.overflow = ''; }
+    items.forEach((img, i) => img.addEventListener('click', () => openBox(i)));
+    overlay.querySelector('.lightbox-close').addEventListener('click', closeBox);
+    overlay.addEventListener('click', (e) => { if(e.target === overlay) closeBox(); });
+    overlay.querySelector('.lightbox-prev').addEventListener('click', () => show(current - 1));
+    overlay.querySelector('.lightbox-next').addEventListener('click', () => show(current + 1));
+    document.addEventListener('keydown', (e) => {
+      if(!overlay.classList.contains('open')) return;
+      if(e.key === 'Escape') closeBox();
+      if(e.key === 'ArrowLeft') show(current - 1);
+      if(e.key === 'ArrowRight') show(current + 1);
+    });
+  })();
+</script>
 </body>
 </html>
