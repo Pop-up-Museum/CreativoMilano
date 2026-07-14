@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>July 15 Martyrs' Monument — Creativo Milano</title>
+<meta name="description" content="July 15 Martyrs' Monument, Ankara, Türkiye — a Creativo Milano monument project.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23FCB040'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FAF8F3; --white:#FFFFFF; --ink:#18181A; --ink-soft:#5C5C57; --line:#E5E1D6;
+    --red:#BF1E2E; --orange:#F1592A; --yellow:#FCB040; --green:#8CC63F; --azure:#25AAE1; --blue:#0F75BC;
+    --font-display:'Space Grotesk',sans-serif; --font-body:'Inter',sans-serif; --font-mono:'JetBrains Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:var(--font-body);color:var(--ink);background:var(--cream);line-height:1.6;}
+  a{color:inherit;}
+  img{display:block;max-width:100%;}
+
+  .nav{position:fixed;top:0;left:0;width:100%;z-index:900;display:flex;align-items:center;justify-content:space-between;
+    padding:20px 6%;background:rgba(250,248,243,.92);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line);}
+  .logo{font-family:var(--font-display);font-weight:700;font-size:1.1rem;letter-spacing:-.02em;text-decoration:none;}
+  .logo span{color:var(--blue);font-weight:500;}
+  .back-link{font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;
+    text-decoration:none;color:var(--ink);opacity:.75;transition:opacity .2s ease;}
+  .back-link:hover{opacity:1;}
+
+  [data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+  [data-reveal].in-view{opacity:1;transform:translateY(0);}
+
+  .mon-hero{min-height:80vh;display:flex;align-items:flex-end;position:relative;}
+  .mon-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;}
+  .mon-hero::after{content:'';position:absolute;inset:0;
+    background:linear-gradient(0deg,rgba(24,24,26,.88) 0%,rgba(24,24,26,.3) 55%,rgba(24,24,26,.1) 100%);}
+  .mon-hero-content{position:relative;z-index:2;padding:6rem 6% 4rem;max-width:780px;color:var(--cream);}
+  .eyebrow-tag{font-family:var(--font-mono);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--yellow);margin-bottom:1.4rem;display:flex;align-items:center;gap:.6rem;}
+  .eyebrow-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);}
+  .mon-hero h1{font-family:var(--font-display);font-weight:700;font-size:clamp(2.1rem,5vw,3.6rem);
+    line-height:1.08;margin-bottom:.4rem;letter-spacing:-.02em;}
+  .mon-hero .subtitle{font-family:var(--font-mono);font-size:.85rem;letter-spacing:.06em;color:rgba(250,248,243,.7);
+    text-transform:uppercase;}
+
+  .mon-info{padding:5rem 6%;max-width:900px;margin:0 auto;}
+  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.6rem;margin-bottom:3rem;
+    padding-bottom:2.5rem;border-bottom:1px solid var(--line);}
+  .info-item .label{font-family:var(--font-mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--red);margin-bottom:.4rem;}
+  .info-item .value{font-family:var(--font-display);font-weight:600;font-size:1rem;line-height:1.3;}
+  .mon-info p.description{color:var(--ink-soft);font-size:1.02rem;line-height:1.75;margin-bottom:1.6rem;}
+  .detail-callout{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--yellow);
+    border-radius:8px;padding:1.2rem 1.4rem;font-size:.92rem;color:var(--ink-soft);}
+  .detail-callout strong{color:var(--ink);font-family:var(--font-display);font-weight:600;}
+
+  .mon-gallery{padding:1rem 6% 5.5rem;max-width:1000px;margin:0 auto;}
+  .mon-gallery h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.4rem,2.6vw,1.8rem);
+    text-align:center;margin-bottom:2rem;color:var(--ink);}
+  .mon-gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;gap:10px;}
+  .mon-gallery-grid img{width:100%;height:100%;object-fit:cover;border-radius:10px;cursor:zoom-in;
+    transition:transform .3s ease,filter .3s ease;}
+  .mon-gallery-grid img:hover{transform:scale(1.03);filter:brightness(1.05);}
+  .g-wide{grid-column:span 2;}
+  .g-tall{grid-row:span 2;}
+  @media (max-width:760px){
+    .mon-gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:170px;}
+  }
+
+  .mon-cta{padding:6.5rem 6%;text-align:center;background:var(--ink);color:var(--cream);overflow:hidden;position:relative;}
+  .mon-cta::before{content:'';position:absolute;inset:-30%;
+    background:conic-gradient(from 0deg,var(--red),var(--orange),var(--yellow),var(--green),var(--azure),var(--blue),var(--red));
+    opacity:.14;filter:blur(70px);animation:spin 32s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .mon-cta-content{position:relative;z-index:2;max-width:600px;margin:0 auto;}
+  .mon-cta h2{font-family:var(--font-display);font-weight:700;font-size:clamp(1.9rem,4.4vw,2.8rem);margin-bottom:1.1rem;}
+  .mon-cta p{font-size:1rem;opacity:.8;margin-bottom:2.2rem;}
+  .btn-primary{font-family:var(--font-mono);font-size:.82rem;text-transform:uppercase;letter-spacing:.04em;
+    background:var(--yellow);color:var(--ink);padding:1rem 1.8rem;border-radius:40px;text-decoration:none;
+    display:inline-block;transition:transform .25s ease,box-shadow .25s ease;}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 24px -12px rgba(0,0,0,.25);}
+  .btn-secondary-light{font-family:var(--font-mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;
+    background:transparent;color:var(--ink);padding:.9rem 1.6rem;border-radius:40px;text-decoration:none;
+    border:1px solid var(--line);display:inline-block;transition:background .25s ease,color .25s ease;}
+  .btn-secondary-light:hover{background:var(--ink);color:var(--cream);}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.6);padding:2.6rem 6% 2.2rem;text-align:center;
+    font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;}
+  footer a{text-decoration:underline;color:rgba(255,255,255,.8);}
+  .footer-logo{display:flex;align-items:center;justify-content:center;gap:.7rem;margin-bottom:1.2rem;}
+  .footer-logo img{height:44px;width:auto;}
+  .footer-logo span{font-family:var(--font-display);color:#fff;font-weight:700;font-size:1.4rem;
+    text-transform:none;letter-spacing:0;}
+
+  .lightbox-overlay{position:fixed;inset:0;background:rgba(10,10,10,.92);z-index:9999;
+    display:flex;align-items:center;justify-content:center;padding:5vh 5vw;
+    opacity:0;pointer-events:none;transition:opacity .25s ease;}
+  .lightbox-overlay.open{opacity:1;pointer-events:auto;}
+  .lightbox-overlay img{max-width:100%;max-height:100%;border-radius:8px;box-shadow:0 24px 70px rgba(0,0,0,.5);cursor:auto;}
+  .lightbox-close,.lightbox-nav{position:absolute;border:none;color:#fff;cursor:pointer;
+    background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;
+    transition:background .2s ease,transform .2s ease;}
+  .lightbox-close:hover,.lightbox-nav:hover{background:rgba(255,255,255,.25);}
+  .lightbox-close{top:24px;right:24px;width:44px;height:44px;border-radius:50%;}
+  .lightbox-nav{top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;}
+  .lightbox-nav:hover{transform:translateY(-50%) scale(1.06);}
+  .lightbox-prev{left:16px;} .lightbox-next{right:16px;}
+  .lightbox-close svg,.lightbox-nav svg{width:20px;height:20px;}
+
+  @media (prefers-reduced-motion:reduce){
+    [data-reveal]{opacity:1!important;transform:none!important;transition:none!important;}
+    .mon-cta::before{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="logo" href="creativo-milano-landing.html">Creativo<span>Milano</span></a>
+  <a class="back-link" href="monuments.html">← Back to Monuments</a>
+</header>
+
+<section class="mon-hero">
+  <img src="images/july_martyrs_monument_04_01.jpg" alt="July 15 Martyrs' Monument illuminated at dusk in Ankara">
+  <div class="mon-hero-content" data-reveal>
+    <p class="eyebrow-tag">Completed project — Monuments</p>
+    <h1>July 15 Martyrs' Monument</h1>
+    <p class="subtitle">Ankara, Türkiye</p>
+  </div>
+</section>
+
+<section class="mon-info">
+  <div class="info-grid" data-reveal>
+    <div class="info-item"><div class="label">City &amp; country</div><div class="value">Ankara, Türkiye</div></div>
+    <div class="info-item"><div class="label">Type</div><div class="value">National memorial monument</div></div>
+    <div class="info-item"><div class="label">Structure</div><div class="value">125 tons of steel</div></div>
+    <div class="info-item"><div class="label">Surface</div><div class="value">3,400 m² Safranbolu Eflani marble</div></div>
+  </div>
+  <p class="description" data-reveal>The July 15 Martyrs' Monument we designed and brought to life is a meaningful memorial project symbolizing national unity and the spirit of heroism. For each martyr, a rose and a cypress tree were planted, offering visitors both a visual and emotional experience. While the names of the 251 martyrs are inscribed on the monument, 125 tons of steel were used in the main structure, and 3,400 m² of Safranbolu Eflani fossilized green marble was used for the upper and surrounding areas.</p>
+  <p class="description" data-reveal>Through a dedicated walkway connecting to the entrance of the Islamic-Ottoman social complex (külliye), visitors embark on a meaningful journey, exploring the monument while experiencing a historical and cultural atmosphere. This project stands as an exemplary work in experience-oriented monument design and cultural heritage projects.</p>
+  <div class="detail-callout" data-reveal><strong>A distinctive detail — </strong>the names of all 251 martyrs are individually inscribed on the monument, with a rose and a cypress tree planted for each of them nearby.</div>
+</section>
+
+<section class="mon-gallery" data-reveal>
+  <h2>More from this project</h2>
+  <div class="mon-gallery-grid">
+    <img class="g-wide g-tall" src="images/july_martyrs_monument_07_01.jpg" alt="Bronze crowd sculpture rising toward the crescent and star at the monument's peak" loading="lazy">
+    <img src="images/july_martyrs_monument_05_01.jpg" alt="Aerial view of the monument under construction, with the Presidential Complex in the background" loading="lazy">
+    <img src="images/july_martyrs_monument_08_01.jpg" alt="Close-up of the crescent and star emblem framing the Presidential Complex" loading="lazy">
+    <img class="g-wide" src="images/july_martyrs_monument_06_01.jpg" alt="Illuminated walkway through the monument at night, with martyrs' names inscribed on the walls" loading="lazy">
+  </div>
+</section>
+
+<section class="mon-cta" data-reveal>
+  <div class="mon-cta-content">
+    <h2>Marking a place or a moment?</h2>
+    <p>Tell us the story behind it — we'll help give it a form that lasts.</p>
+    <a class="btn-primary start-project-btn" href="creativo-milano-landing.html#contact">Start a project</a>
+    <p style="margin-top:1.4rem;"><a class="btn-secondary-light" href="monuments.html">See other Monument projects</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo"><img src="images/Logo1.png" alt=""><span>Creativo Milano</span></div>
+  <p>Creativo Milano — part of the <a href="https://www.outdoorfactory.com" target="_blank" rel="noopener">Outdoor Factory</a> group · <a href="cookie-policy.html">Cookie Policy</a></p>
+</footer>
+
+<script>
+  document.querySelectorAll('[data-reveal]').forEach(el => {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) { el.classList.add('in-view'); io.unobserve(el); } });
+    }, { threshold: .15 });
+    io.observe(el);
+  });
+
+  (function(){
+    const items = Array.from(document.querySelectorAll('.mon-gallery-grid img'));
+    if(!items.length) return;
+    let current = 0;
+    const overlay = document.createElement('div');
+    overlay.className = 'lightbox-overlay';
+    overlay.innerHTML = `
+      <button class="lightbox-close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      <button class="lightbox-nav lightbox-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+      <img src="" alt="">
+      <button class="lightbox-nav lightbox-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>`;
+    document.body.appendChild(overlay);
+    const imgEl = overlay.querySelector('img');
+    function show(i){ current = (i + items.length) % items.length; imgEl.src = items[current].src; imgEl.alt = items[current].alt || ''; }
+    function openBox(i){ show(i); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeBox(){ overlay.classList.remove('open'); document.body.style.overflow = ''; }
+    items.forEach((img, i) => img.addEventListener('click', () => openBox(i)));
+    overlay.querySelector('.lightbox-close').addEventListener('click', closeBox);
+    overlay.addEventListener('click', (e) => { if(e.target === overlay) closeBox(); });
+    overlay.querySelector('.lightbox-prev').addEventListener('click', () => show(current - 1));
+    overlay.querySelector('.lightbox-next').addEventListener('click', () => show(current + 1));
+    document.addEventListener('keydown', (e) => {
+      if(!overlay.classList.contains('open')) return;
+      if(e.key === 'Escape') closeBox();
+      if(e.key === 'ArrowLeft') show(current - 1);
+      if(e.key === 'ArrowRight') show(current + 1);
+    });
+  })();
+</script>
+
+<script src="project-intake.js"></script>
+<script src="cookie-consent.js"></script>
+</body>
+</html>
